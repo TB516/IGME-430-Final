@@ -1,0 +1,22 @@
+{
+  "name": "pokefinder",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build:client": "cd client && npm run build",
+    "build:server": "cd server && npm run build",
+    "build": "npm run build:client && npm run build:server",
+    "start": "node dist/server/server.js",
+    "dev:client": "cd client && vite build --watch",
+    "dev:server": "cd server && npm run dev",
+    "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\""
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  }
+}

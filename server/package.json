@@ -1,0 +1,20 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "dev": "nodemon src/server.ts",
+    "build": "tsc"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^22.7.4",
+    "nodemon": "^3.1.7",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.2"
+  }
+}
