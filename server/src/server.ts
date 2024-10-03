@@ -9,13 +9,13 @@ const routes: Record<string, ResponseMethod> = {
   '/': getIndexHtml,
   '/assets/index.css': getIndexCss,
   '/assets/index.js': getIndexJs,
-  '/404' : () => {},
+  '/404': () => {},
 };
 
 const onRequest = (request: IncomingMessage, response: ServerResponse) => {
   const parsedUrl = new URL(request.url!, `https://${request.headers.host}`);
 
-  console.log(parsedUrl.pathname)
+  console.log(parsedUrl.pathname);
 
   if (routes[parsedUrl.pathname]) {
     return routes[parsedUrl.pathname](request, response);

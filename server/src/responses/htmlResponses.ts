@@ -1,14 +1,15 @@
 import fs from 'fs';
 import { IncomingMessage, ServerResponse } from 'http';
 
-let htmlPath: fs.PathOrFileDescriptor, cssPath: fs.PathOrFileDescriptor, bundlePath: fs.PathOrFileDescriptor;
+let htmlPath: fs.PathOrFileDescriptor;
+let cssPath: fs.PathOrFileDescriptor;
+let bundlePath: fs.PathOrFileDescriptor;
 
 if (process.env.NODE_ENV === 'production') {
   htmlPath = `${__dirname}/../../client/index.html`;
   cssPath = `${__dirname}/../../client/assets/index.css`;
   bundlePath = `${__dirname}/../../client/assets/index.js`;
-}
-else {
+} else {
   htmlPath = `${__dirname}/../../../dist/client/index.html`;
   cssPath = `${__dirname}/../../../dist/client/assets/index.css`;
   bundlePath = `${__dirname}/../../../dist/client/assets/index.js`;
