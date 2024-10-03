@@ -1,5 +1,5 @@
 import http, { IncomingMessage, ServerResponse } from 'http';
-import { getIndexCss, getIndexHtml, getIndexJs } from './responses/htmlResponses.js';
+import { getIndexCss, getIndexHtml, getIndexJs } from './responses/htmlResponses';
 
 // eslint-disable-next-line no-unused-vars, max-len
 type ResponseMethod = (arg1: IncomingMessage, arg2: ServerResponse) => void;

@@ -1,6 +1,5 @@
 import fs from 'fs';
 import { IncomingMessage, ServerResponse } from 'http';
-const __dirname = import.meta.dirname;
 
 let htmlPath: fs.PathOrFileDescriptor, cssPath: fs.PathOrFileDescriptor, bundlePath: fs.PathOrFileDescriptor;
 

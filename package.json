@@ -15,7 +15,6 @@
     "pretest": "npm run lint:client && npm run lint:server",
     "test": "echo \"Tests passed!\""
   },
-  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
