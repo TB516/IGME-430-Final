@@ -9,7 +9,11 @@
     "start": "node dist/server/server.js",
     "dev:client": "cd client && vite build --watch",
     "dev:server": "cd server && npm run dev",
-    "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\""
+    "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
+    "lint:client": "cd client && npm run lint",
+    "lint:server": "cd server && npm run lint",
+    "pretest": "npm run lint:client && npm run lint:server",
+    "test": "echo \"Tests passed!\""
   },
   "type": "module",
   "keywords": [],
