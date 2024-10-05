@@ -1,12 +1,12 @@
-import 'dotenv/config';
 import http, { IncomingMessage, ServerResponse } from 'http';
 import mongoose from 'mongoose';
 import { getIndexCss, getIndexHtml, getIndexJs } from './responses/htmlResponses';
 import { getAllSpellsRequest } from './responses/apiResponses';
 
+require('dotenv').config();
+
 // eslint-disable-next-line no-unused-vars, max-len
 type ResponseMethod = (request: IncomingMessage, response: ServerResponse) => void;
-
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 const routes: Record<string, ResponseMethod> = {
   '/': getIndexHtml,
