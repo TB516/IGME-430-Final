@@ -1,7 +1,12 @@
 import http, { IncomingMessage, ServerResponse } from 'http';
 import mongoose from 'mongoose';
-import { getIndexCss, getIndexHtml, getIndexJs } from './responses/htmlResponses';
-import { getAllSpellsRequest } from './responses/apiResponses';
+import { getIndexCss, getIndexHtml, getIndexJs } from './controllers/htmlResponses';
+import {
+  getSpellResponse,
+  getSorceryResponse,
+  getIncantationResponse,
+  endpointNotFoundResponse,
+} from './controllers/apiResponses';
 
 require('dotenv').config();
 
@@ -12,7 +17,9 @@ const routes: Record<string, ResponseMethod> = {
   '/': getIndexHtml,
   '/assets/index.css': getIndexCss,
   '/assets/index.js': getIndexJs,
-  '/api/spells': getAllSpellsRequest,
+  '/api/spells': getSpellResponse,
+  '/api/sorceries': getSorceryResponse,
+  '/api/incantations': getIncantationResponse,
 };
 
 const onRequest = (request: IncomingMessage, response: ServerResponse) => {
@@ -20,6 +27,9 @@ const onRequest = (request: IncomingMessage, response: ServerResponse) => {
 
   if (routes[parsedUrl.pathname]) {
     return routes[parsedUrl.pathname](request, response);
+  }
+  if (parsedUrl.pathname.startsWith('/api/')) {
+    return endpointNotFoundResponse(request, response);
   }
 
   return routes['/'](request, response);
