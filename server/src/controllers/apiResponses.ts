@@ -1,5 +1,5 @@
 import { IncomingMessage, ServerResponse } from 'http';
-import { ErrorMessage } from '../models/ErrorMessage';
+import ErrorMessage from '../models/ErrorMessage';
 import ISpellQuery from '../models/ISpellQuery';
 import { getIncantationMatches, getSorceryMatches, getSpellMatches } from './dbQueries';
 
