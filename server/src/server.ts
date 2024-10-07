@@ -3,8 +3,8 @@ import mongoose from 'mongoose';
 import { getIndexCss, getIndexHtml, getIndexJs } from './controllers/htmlResponses';
 import {
   getSpellResponse,
-  getSorceryResponse,
-  getIncantationResponse,
+  sorceryResponse,
+  incantationResponse,
   endpointNotFoundResponse,
 } from './controllers/apiResponses';
 
@@ -18,8 +18,8 @@ const routes: Record<string, ResponseMethod> = {
   '/assets/index.css': getIndexCss,
   '/assets/index.js': getIndexJs,
   '/api/spells': getSpellResponse,
-  '/api/sorceries': getSorceryResponse,
-  '/api/incantations': getIncantationResponse,
+  '/api/spells/sorceries': sorceryResponse,
+  '/api/spells/incantations': incantationResponse,
 };
 
 const onRequest = (request: IncomingMessage, response: ServerResponse) => {
