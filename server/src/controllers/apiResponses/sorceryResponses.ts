@@ -37,7 +37,7 @@ const getSorceryResponse = async (request: IncomingMessage, response: ServerResp
 };
 
 const addSorceryResponse = async (request: IncomingMessage, response: ServerResponse, body: ISpell) => {
-  const doc = new Sorceries(body);
+  const doc = new Sorceries(body, { versionKey: false });
   const errors = doc.validateSync();
 
   if (errors) {
@@ -57,7 +57,7 @@ const addSorceryResponse = async (request: IncomingMessage, response: ServerResp
 };
 
 const updateSorceryResponse = async (request: IncomingMessage, response: ServerResponse, body: ISpell, id: ObjectId) => {
-  const doc = new Sorceries(body);
+  const doc = new Sorceries(body, { versionKey: false });
   doc._id = id;
 
   const errors = doc.validateSync();

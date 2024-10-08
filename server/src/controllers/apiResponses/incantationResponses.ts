@@ -37,7 +37,7 @@ const getIncantationResponse = async (request: IncomingMessage, response: Server
 };
 
 const addIncantationResponse = async (request: IncomingMessage, response: ServerResponse, body: ISpell) => {
-  const doc = new Incantations(body);
+  const doc = new Incantations(body, { versionKey: false });
   const errors = doc.validateSync();
 
   if (errors) {
@@ -57,7 +57,7 @@ const addIncantationResponse = async (request: IncomingMessage, response: Server
 };
 
 const updateIncantationResponse = async (request: IncomingMessage, response: ServerResponse, body: ISpell, id: ObjectId) => {
-  const doc = new Incantations(body);
+  const doc = new Incantations(body, { versionKey: false });
   doc._id = id;
 
   const errors = doc.validateSync();
