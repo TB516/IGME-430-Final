@@ -1,4 +1,5 @@
 import { IncomingMessage, ServerResponse } from 'http';
+import { ObjectId } from 'mongoose';
 import ISpellQuery from '../../models/ISpellQuery';
 import { getSorceryMatches } from '../dbQueries';
 import { badRequestResponse, methodNotAllowedResponse, postTypeUnsupportedResponse } from './errorResponses';
@@ -35,28 +36,49 @@ const getSorceryResponse = async (request: IncomingMessage, response: ServerResp
   return response.end();
 };
 
-const postSorceryResponse = async (request: IncomingMessage, response: ServerResponse, body: ISpell) => {
+const addSorceryResponse = async (request: IncomingMessage, response: ServerResponse, body: ISpell) => {
   const doc = new Sorceries(body);
   const errors = doc.validateSync();
 
   if (errors) {
-    return badRequestResponse(request, response, { id: 'badRequest', message: 'Invalid sorcery data.' });
+    return badRequestResponse(request, response, { id: 'badRequest', message: errors.message });
   }
 
-  const { isNew } = await doc.save();
+  await Sorceries.create(doc);
 
   const jsonString = JSON.stringify(doc as ISpell);
 
-  if (isNew) {
-    response.writeHead(201, 'Created', {
-      'content-type': 'application/json',
-      'content-length': Buffer.byteLength(jsonString, 'utf-8'),
-    });
-    response.write(jsonString);
-  } else {
-    response.writeHead(204, 'Updated');
-  }
+  response.writeHead(201, 'Created Sorcery', {
+    'content-type': 'application/json',
+    'content-length': Buffer.byteLength(jsonString, 'utf-8'),
+  });
+  response.write(jsonString);
   return response.end();
+};
+
+const updateSorceryResponse = async (request: IncomingMessage, response: ServerResponse, body: ISpell, id: ObjectId) => {
+  const doc = new Sorceries(body);
+  doc._id = id;
+
+  const errors = doc.validateSync();
+
+  if (errors) {
+    return badRequestResponse(request, response, { id: 'badRequest', message: errors.message });
+  }
+
+  await Sorceries.findByIdAndUpdate(id, doc);
+
+  response.writeHead(204, 'Updated Sorcery');
+  return response.end();
+};
+
+const postSorceryResponse = async (request: IncomingMessage, response: ServerResponse, body: ISpell) => {
+  const exists = await Sorceries.exists(body);
+
+  if (exists) {
+    return updateSorceryResponse(request, response, body, exists._id);
+  }
+  return addSorceryResponse(request, response, body);
 };
 
 const postSorceryHandler = async (request: IncomingMessage, response: ServerResponse) => {

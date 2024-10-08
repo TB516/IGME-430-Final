@@ -1,4 +1,5 @@
 import { IncomingMessage, ServerResponse } from 'http';
+import { ObjectId } from 'mongoose';
 import ISpellQuery from '../../models/ISpellQuery';
 import { getIncantationMatches } from '../dbQueries';
 import { badRequestResponse, methodNotAllowedResponse, postTypeUnsupportedResponse } from './errorResponses';
@@ -35,28 +36,49 @@ const getIncantationResponse = async (request: IncomingMessage, response: Server
   return response.end();
 };
 
-const postIncantationResponse = async (request: IncomingMessage, response: ServerResponse, body: ISpell) => {
+const addIncantationResponse = async (request: IncomingMessage, response: ServerResponse, body: ISpell) => {
   const doc = new Incantations(body);
   const errors = doc.validateSync();
 
   if (errors) {
-    return badRequestResponse(request, response, { id: 'badRequest', message: 'Invalid incantation data.' });
+    return badRequestResponse(request, response, { id: 'badRequest', message: errors.message });
   }
 
-  const { isNew } = await doc.save();
+  await Incantations.create(doc);
 
   const jsonString = JSON.stringify(doc as ISpell);
 
-  if (isNew) {
-    response.writeHead(201, 'Created', {
-      'content-type': 'application/json',
-      'content-length': Buffer.byteLength(jsonString, 'utf-8'),
-    });
-    response.write(jsonString);
-  } else {
-    response.writeHead(204, 'Updated');
-  }
+  response.writeHead(201, 'Created Incantation', {
+    'content-type': 'application/json',
+    'content-length': Buffer.byteLength(jsonString, 'utf-8'),
+  });
+  response.write(jsonString);
   return response.end();
+};
+
+const updateIncantationResponse = async (request: IncomingMessage, response: ServerResponse, body: ISpell, id: ObjectId) => {
+  const doc = new Incantations(body);
+  doc._id = id;
+
+  const errors = doc.validateSync();
+
+  if (errors) {
+    return badRequestResponse(request, response, { id: 'badRequest', message: errors.message });
+  }
+
+  await Incantations.findByIdAndUpdate(id, doc);
+
+  response.writeHead(204, 'Updated Incantation');
+  return response.end();
+};
+
+const postIncantationResponse = async (request: IncomingMessage, response: ServerResponse, body: ISpell) => {
+  const exists = await Incantations.exists({ id: body.id });
+
+  if (exists) {
+    return updateIncantationResponse(request, response, body, exists._id);
+  }
+  return addIncantationResponse(request, response, body);
 };
 
 const postIncantationHandler = async (request: IncomingMessage, response: ServerResponse) => {
