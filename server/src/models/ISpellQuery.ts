@@ -1,8 +1,8 @@
-interface ISpell{
+interface ISpellQuery{
   name: string | RegExp,
   type: string | RegExp,
   cost: number,
   slots: number,
 }
 
-export default ISpell;
+export default ISpellQuery;

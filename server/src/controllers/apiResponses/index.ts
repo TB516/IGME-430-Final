@@ -7,10 +7,6 @@ import { getSpellMatches } from '../dbQueries';
 import IErrorMessage from '../../models/IErrorMessage';
 
 const getSpellResponse = async (request: IncomingMessage, response: ServerResponse) => {
-  if (request.method !== 'HEAD' && request.method !== 'GET') {
-    return methodNotAllowedResponse(request, response, { id: 'methodNotAllowed', message: `${request.method} requests not supported at this endpoint.` } as IErrorMessage);
-  }
-
   const queryParams = new URL(request.url!, `https://${request.headers.host}`).searchParams;
   const spellQuery = {} as ISpellQuery;
 
@@ -41,8 +37,20 @@ const getSpellResponse = async (request: IncomingMessage, response: ServerRespon
   return response.end();
 };
 
+const spellResponse = async (request: IncomingMessage, response: ServerResponse) => {
+  if (request.method === 'HEAD' || request.method === 'GET') {
+    return getSpellResponse(request, response);
+  }
+  return methodNotAllowedResponse(
+    request,
+    response,
+    { id: 'methodNotAllowed', message: `${request.method} requests not supported at this endpoint.` } as IErrorMessage,
+    ['HEAD', 'GET', 'POST'],
+  );
+};
+
 export {
-  getSpellResponse,
+  spellResponse,
   incantationResponse,
   sorceryResponse,
   endpointNotFoundResponse,

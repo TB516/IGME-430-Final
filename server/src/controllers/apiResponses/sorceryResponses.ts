@@ -1,9 +1,11 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import ISpellQuery from '../../models/ISpellQuery';
 import { getSorceryMatches } from '../dbQueries';
-import { methodNotAllowedResponse } from './errorResponses';
+import { badRequestResponse, methodNotAllowedResponse, postTypeUnsupportedResponse } from './errorResponses';
 import IErrorMessage from '../../models/IErrorMessage';
-// import ISpell from '../../models/ISpell';
+import ISpell from '../../models/ISpell';
+import { parseJson, parseUrlencoded } from '../../models/utils/parsers';
+import { Sorceries } from '../../models/Spell';
 
 const getSorceryResponse = async (request: IncomingMessage, response: ServerResponse) => {
   const queryParams = new URL(request.url!, `https://${request.headers.host}`).searchParams;
@@ -33,28 +35,47 @@ const getSorceryResponse = async (request: IncomingMessage, response: ServerResp
   return response.end();
 };
 
-// const postSorceryResponse = async (request: IncomingMessage, response: ServerResponse, body: ISpell) => {
-// };
+const postSorceryResponse = async (request: IncomingMessage, response: ServerResponse, body: ISpell) => {
+  const doc = new Sorceries(body);
+  const errors = doc.validateSync();
 
-// eslint-disable-next-line no-unused-vars
+  if (errors) {
+    return badRequestResponse(request, response, { id: 'badRequest', message: 'Invalid sorcery data.' });
+  }
+
+  const { isNew } = await doc.save();
+
+  const jsonString = JSON.stringify(doc as ISpell);
+
+  if (isNew) {
+    response.writeHead(201, 'Created', {
+      'content-type': 'application/json',
+      'content-length': Buffer.byteLength(jsonString, 'utf-8'),
+    });
+    response.write(jsonString);
+  } else {
+    response.writeHead(204, 'Updated');
+  }
+  return response.end();
+};
+
 const postSorceryHandler = async (request: IncomingMessage, response: ServerResponse) => {
-  // let body = '';
+  let body = '';
 
-  // request.on('data', (chunk) => {
-  //   body += chunk.toString();
-  // });
+  request.on('data', (chunk) => {
+    body += chunk.toString();
+  });
 
-  // request.on('end', () => {
-  //   const spell: ISpell;
+  request.on('end', () => {
+    if (request.headers['content-type'] === 'application/json') {
+      return postSorceryResponse(request, response, parseJson(body));
+    }
+    if (request.headers['content-type'] === 'application/x-www-form-urlencoded') {
+      return postSorceryResponse(request, response, parseUrlencoded(body));
+    }
 
-  //   // if (request.headers['content-type'] === 'application/json') {
-
-  //   // } else if (request.headers['content-type'] === 'application/x-www-form-urlencoded') {
-
-  //   // }
-
-  //   return postSorceryResponse(request, response, spell);
-  // });
+    return postTypeUnsupportedResponse(request, response);
+  });
 };
 
 const sorceryResponse = async (request: IncomingMessage, response: ServerResponse) => {
@@ -64,7 +85,12 @@ const sorceryResponse = async (request: IncomingMessage, response: ServerRespons
   if (request.method === 'POST') {
     return postSorceryHandler(request, response);
   }
-  return methodNotAllowedResponse(request, response, { id: 'methodNotAllowed', message: `${request.method} requests not supported at this endpoint.` } as IErrorMessage);
+  return methodNotAllowedResponse(
+    request,
+    response,
+    { id: 'methodNotAllowed', message: `${request.method} requests not supported at this endpoint.` } as IErrorMessage,
+    ['HEAD', 'GET', 'POST'],
+  );
 };
 
 export default sorceryResponse;

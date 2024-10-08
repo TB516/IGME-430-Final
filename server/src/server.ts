@@ -2,7 +2,7 @@ import http, { IncomingMessage, ServerResponse } from 'http';
 import mongoose from 'mongoose';
 import { getIndexCss, getIndexHtml, getIndexJs } from './controllers/htmlResponses';
 import {
-  getSpellResponse,
+  spellResponse,
   sorceryResponse,
   incantationResponse,
   endpointNotFoundResponse,
@@ -17,7 +17,7 @@ const routes: Record<string, ResponseMethod> = {
   '/': getIndexHtml,
   '/assets/index.css': getIndexCss,
   '/assets/index.js': getIndexJs,
-  '/api/spells': getSpellResponse,
+  '/api/spells': spellResponse,
   '/api/spells/sorceries': sorceryResponse,
   '/api/spells/incantations': incantationResponse,
 };
