@@ -26,7 +26,7 @@ const updateSpellResponse = async (request: IncomingMessage, response: ServerRes
 
 const postSpellResponse = async (request: IncomingMessage, response: ServerResponse, SpellModel: Model<ISpell>, body: ISpell) => {
   const exists = await SpellModel.exists({ name: body.name });
-  const doc = new SpellModel(body, { versionKey: false });
+  const doc = new SpellModel(body);
   const errors = doc.validateSync();
 
   if (errors) {
