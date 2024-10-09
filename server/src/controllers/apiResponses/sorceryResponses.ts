@@ -73,7 +73,7 @@ const updateSorceryResponse = async (request: IncomingMessage, response: ServerR
 };
 
 const postSorceryResponse = async (request: IncomingMessage, response: ServerResponse, body: ISpell) => {
-  const exists = await Sorceries.exists(body);
+  const exists = await Sorceries.exists({ name: body.name });
 
   if (exists) {
     return updateSorceryResponse(request, response, body, exists._id);

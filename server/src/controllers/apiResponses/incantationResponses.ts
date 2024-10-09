@@ -73,7 +73,7 @@ const updateIncantationResponse = async (request: IncomingMessage, response: Ser
 };
 
 const postIncantationResponse = async (request: IncomingMessage, response: ServerResponse, body: ISpell) => {
-  const exists = await Incantations.exists({ id: body.id });
+  const exists = await Incantations.exists({ name: body.name });
 
   if (exists) {
     return updateIncantationResponse(request, response, body, exists._id);

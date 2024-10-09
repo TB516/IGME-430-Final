@@ -8,7 +8,7 @@ const reqSchema = new Schema<IStatReq>({
 });
 
 const spellSchema = new Schema<ISpell>({
-  id: { type: String, required: true },
+  id: { type: String, required: false },
   name: { type: String, required: true },
   image: { type: String, required: true },
   description: { type: String, required: true },
