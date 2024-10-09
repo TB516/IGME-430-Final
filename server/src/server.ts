@@ -2,11 +2,11 @@ import http, { IncomingMessage, ServerResponse } from 'http';
 import mongoose from 'mongoose';
 import { getIndexCss, getIndexHtml, getIndexJs } from './controllers/htmlResponses';
 import {
-  spellResponse,
-  sorceryResponse,
-  incantationResponse,
-  endpointNotFoundResponse,
-} from './controllers/apiResponses';
+  spellsResponse,
+  sorceriesResponse,
+  incantationsResponse,
+} from './controllers/apiResponses/spells';
+import { endpointNotFoundResponse } from './controllers/apiResponses/errorResponses';
 
 require('dotenv').config();
 
@@ -17,9 +17,9 @@ const routes: Record<string, ResponseMethod> = {
   '/': getIndexHtml,
   '/assets/index.css': getIndexCss,
   '/assets/index.js': getIndexJs,
-  '/api/spells': spellResponse,
-  '/api/spells/sorceries': sorceryResponse,
-  '/api/spells/incantations': incantationResponse,
+  '/api/spells': spellsResponse,
+  '/api/spells/sorceries': sorceriesResponse,
+  '/api/spells/incantations': incantationsResponse,
 };
 
 const onRequest = (request: IncomingMessage, response: ServerResponse) => {

@@ -5,6 +5,7 @@ const parseJson = (content: string) : ISpell => {
 };
 
 const parseUrlencoded = (content: string): ISpell => {
+  // Look at demos
   return {} as ISpell;
 };
 
