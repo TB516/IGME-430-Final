@@ -3,7 +3,6 @@ import IStatReq from './IStatReq';
 
 interface ISpell{
   _id: ObjectId,
-  id: string,
   name: string,
   image: string,
   description: string,
