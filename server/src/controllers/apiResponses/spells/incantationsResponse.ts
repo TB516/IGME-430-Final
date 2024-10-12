@@ -1,6 +1,6 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import { methodNotAllowedResponse } from '../errorResponses';
-import { getSpellsResponse, postSpellHandler } from './spellResponses';
+import { deleteSpellHandler, getSpellsResponse, postSpellHandler } from './spellResponses';
 import { getIncantationMatches } from './dbQueries';
 import { Incantations } from '../../../models/Spell';
 
@@ -11,11 +11,15 @@ const incantationsResponse = async (request: IncomingMessage, response: ServerRe
   if (request.method === 'POST') {
     return postSpellHandler(request, response, Incantations);
   }
+  if (request.method === 'DELETE') {
+    return deleteSpellHandler(request, response, Incantations);
+  }
+
   return methodNotAllowedResponse(
     request,
     response,
     { id: 'methodNotAllowed', message: `${request.method} requests not supported at this endpoint.` },
-    ['HEAD', 'GET', 'POST'],
+    ['HEAD', 'GET', 'POST', 'DELETE'],
   );
 };
 

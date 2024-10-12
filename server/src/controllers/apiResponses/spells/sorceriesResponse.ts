@@ -4,6 +4,7 @@ import getSpellsResponse from './spellResponses/getSpells';
 import { getSpellMatches } from './dbQueries';
 import postSpellHandler from './spellResponses/postSpell';
 import { Sorceries } from '../../../models/Spell';
+import { deleteSpellHandler } from './spellResponses';
 
 const sorceriesResponse = async (request: IncomingMessage, response: ServerResponse) => {
   if (request.method === 'HEAD' || request.method === 'GET') {
@@ -12,11 +13,15 @@ const sorceriesResponse = async (request: IncomingMessage, response: ServerRespo
   if (request.method === 'POST') {
     return postSpellHandler(request, response, Sorceries);
   }
+  if (request.method === 'DELETE') {
+    return deleteSpellHandler(request, response, Sorceries);
+  }
+
   return methodNotAllowedResponse(
     request,
     response,
     { id: 'methodNotAllowed', message: `${request.method} requests not supported at this endpoint.` },
-    ['HEAD', 'GET', 'POST'],
+    ['HEAD', 'GET', 'POST', 'DELETE'],
   );
 };
 
