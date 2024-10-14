@@ -1,26 +1,26 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "main": "index.ts",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/server.ts",
+    "projectDev": "nodemon src/server.ts",
     "build": "tsc",
     "lint": "eslint ./src . --ext .ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "devDependencies": {
-    "@types/node": "^22.7.4",
-    "@typescript-eslint/eslint-plugin": "^8.8.0",
-    "@typescript-eslint/parser": "^8.8.0",
-    "eslint": "^8.57.1",
+    "@types/node": "^22.7.5",
+    "@typescript-eslint/eslint-plugin": "^8.8.1",
+    "@typescript-eslint/parser": "^8.8.1",
+    "dotenv": "^16.4.5",
+    "eslint": "^9.11.1",
     "eslint-config-airbnb": "^19.0.4",
+    "mongoose": "^8.7.1",
     "nodemon": "^3.1.7",
     "tsx": "^4.19.1",
-    "typescript": "^5.6.2",
-    "dotenv": "^16.4.5",
-    "mongoose": "^8.7.0"
+    "typescript": "^5.5.3"
   }
 }

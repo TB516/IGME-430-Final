@@ -1,38 +1,19 @@
 {
   "name": "elden-ring-api",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "install:client": "cd client && npm install",
-    "install:server": "cd server && npm install",
-    "install:all": "npm install && npm run install:client && npm run install:server",
-    "heroku-prebuild:client": "npm install --prefix client --production=false",
-    "heroku-prebuild:server": "npm install --prefix server --production=false",
-    "heroku-prebuild": "npm run heroku-prebuild:client && npm run heroku-prebuild:server",
-    "build:client": "cd client && npm run build --prod",
-    "build:server": "cd server && npm run build --prod",
-    "build": "npm run build:client && npm run build:server",
     "start": "node dist/server/server.js",
-    "dev:client": "cd client && vite build --watch",
-    "dev:server": "cd server && npm run dev",
-    "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
-    "lint:client": "cd client && npm run lint",
-    "lint:server": "cd server && npm run lint",
-    "pretest": "npm run lint:client && npm run lint:server",
+    "build": "pnpm -r run build",
+    "dev": "pnpm -r run projectDev",
     "test": "echo \"Tests passed!\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
-  "devDependencies": {
-    "concurrently": "^9.0.1"
-  },
   "dependencies": {
     "dotenv": "^16.4.5",
-    "mongoose": "^8.7.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^6.27.0"
+    "mongoose": "^8.7.1"
   }
 }
