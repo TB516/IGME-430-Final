@@ -1,6 +1,6 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import { HydratedDocument, Model } from 'mongoose';
-import ISpell from '../../../../models/ISpell';
+import { ISpell } from 'elden-ring-types';
 import { badRequestResponse, postTypeUnsupportedResponse } from '../../errorResponses';
 import { parseJson, parseUrlencoded } from '../../../../models/utils/parsers';
 

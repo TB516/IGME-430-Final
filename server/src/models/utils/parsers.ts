@@ -1,4 +1,4 @@
-import ISpell from '../ISpell';
+import { ISpell } from 'elden-ring-types';
 
 const parseJson = (content: string) : ISpell => {
   return JSON.parse(content) as ISpell;
