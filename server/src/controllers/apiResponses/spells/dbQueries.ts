@@ -17,9 +17,17 @@ const getIncantationMatches = async (query : ISpellQuery): Promise<ISpell[]> => 
   return [...await Incantations.find(query)];
 };
 
+const getSpellReqMatches = async (query : ISpellQuery): Promise<ISpell[]> => {
+  return [
+    ...await Sorceries.find(query).select(['name', 'requires']),
+    ...await Incantations.find(query).select(['name', 'requires']),
+  ];
+};
+
 export {
   dbQuery,
   getSpellMatches,
+  getSpellReqMatches,
   getSorceryMatches,
   getIncantationMatches,
 };

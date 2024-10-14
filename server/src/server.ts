@@ -7,6 +7,7 @@ import {
   incantationsResponse,
 } from './controllers/apiResponses/spells';
 import { endpointNotFoundResponse } from './controllers/apiResponses/errorResponses';
+import spellsReqsResponse from './controllers/apiResponses/spells/spellsReqsResponse';
 
 require('dotenv').config();
 
@@ -18,6 +19,7 @@ const routes: Record<string, ResponseMethod> = {
   '/assets/index.css': getIndexCss,
   '/assets/index.js': getIndexJs,
   '/api/spells': spellsResponse,
+  '/api/spells/reqs': spellsReqsResponse,
   '/api/spells/sorceries': sorceriesResponse,
   '/api/spells/incantations': incantationsResponse,
 };
