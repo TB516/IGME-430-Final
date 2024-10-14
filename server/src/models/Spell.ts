@@ -1,6 +1,5 @@
 import { model, Schema } from 'mongoose';
-import ISpell from './ISpell';
-import IStatReq from './IStatReq';
+import { ISpell, IStatReq } from 'elden-ring-types';
 
 const reqSchema = new Schema<IStatReq>(
   {
