@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node dist/server/server.js",
-    "build": "pnpm -r run build",
-    "dev": "pnpm -r run projectDev",
+    "build": "pnpm run -r build",
+    "dev": "pnpm run --parallel projectDev",
+    "pretest": "pnpm run -r lint",
     "test": "echo \"Tests passed!\""
   },
   "keywords": [],
