@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { SpellFormArgs } from "../models/SpellFormArgs";
+import { ISpellFormArgs } from "../models/ISpellFormArgs";
+import { SpellService } from "../services/SpellService";
 
-export const SpellForm = (props: SpellFormArgs) : React.JSX.Element => {
+export const SpellForm = (props: ISpellFormArgs) : React.JSX.Element => {
   const [spell, setSpell] = useState(props.spell);
-
 
   const handleFormChangeString = (e: React.FormEvent<HTMLInputElement> | React.FormEvent<HTMLSelectElement>) => {
     const key = e.currentTarget.name;
@@ -50,7 +50,13 @@ export const SpellForm = (props: SpellFormArgs) : React.JSX.Element => {
       setSpell({...spell, slots: 0});
     }
 
-    console.log(spell);
+    props.callback(SpellService.GetEndpointResponse(`/${spell.type}`, 
+      {
+        name: spell.name,
+        cost: spell.cost,
+        slots: spell.slots,
+      }
+    ));
   };
 
   return(
@@ -86,17 +92,6 @@ export const SpellForm = (props: SpellFormArgs) : React.JSX.Element => {
           value={spell.description} 
           onChange={handleFormChangeString} 
           disabled={(props.method === "GET" || props.method === "Head")} />
-      </div>
-
-      <div id="formTypeGroup" className="field">
-        <label htmlFor="typeInput" className="label">Spell Type:</label>
-        <div className="select">
-          <select id="typeInput" name="type" value={spell.type} onChange={handleFormChangeString} disabled={(props.method === "GET" || props.method === "Head")}>
-            <option value="" defaultChecked disabled></option>
-            <option value="Sorceries">Sorceries</option>
-            <option value="Incantations">Incantations</option>
-          </select>
-        </div>
       </div>
 
       <div id="formCostGroup" className="field">

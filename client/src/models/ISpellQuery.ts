@@ -1,5 +1,5 @@
 interface ISpellQuery{
-  name: RegExp,
+  name: string,
   cost: number,
   slots: number,
 }

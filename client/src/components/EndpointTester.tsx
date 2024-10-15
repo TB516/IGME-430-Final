@@ -1,8 +1,8 @@
 import { ISpell, IStatReq } from "elden-ring-types";
 import { SpellForm } from "./SpellForm";
-import { EndpointTesterArgs } from "../models/EndpointTesterArgs";
+import { IEndpointTesterArgs } from "../models/IEndpointTesterArgs";
 
-export const EndpointTester = (props: EndpointTesterArgs): React.JSX.Element => {
+export const EndpointTester = (props: IEndpointTesterArgs): React.JSX.Element => {
   const blankStatReqs = [
     {
       name: "Intelligence",
@@ -29,10 +29,14 @@ export const EndpointTester = (props: EndpointTesterArgs): React.JSX.Element => 
     requires: blankStatReqs,
   } as ISpell;
 
+  const handleClick = () => {
+
+  };
+
   return(
     <div className="columns">
       <div className="firstColumn">
-        <SpellForm method={props.method} spell={blankSpell}></SpellForm>
+        <SpellForm method={props.method} spell={blankSpell} callback={handleClick}></SpellForm>
       </div>
       <div className="secondColumn field">
         <label htmlFor="endpointResult" className="label">Endpoint Result</label>
