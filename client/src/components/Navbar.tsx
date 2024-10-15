@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 export const Navbar = (): React.JSX.Element => {
   const [isActive, setActive] = useState(false);
@@ -9,7 +9,7 @@ export const Navbar = (): React.JSX.Element => {
 
   return (
     <>
-      <header>
+      <header className="section">
         <nav className="navbar is-link is-fixed-top" role="navigation">
           <div className="navbar-brand">
             <Link to={"/"} className="navbar-item">Home</Link>
@@ -29,6 +29,7 @@ export const Navbar = (): React.JSX.Element => {
           </div>
         </nav>
       </header>
+      <Outlet></Outlet>
     </>
   )
 };

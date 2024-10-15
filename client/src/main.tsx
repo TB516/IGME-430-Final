@@ -10,19 +10,19 @@ import { Home } from './pages/Home'
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Navbar></Navbar>,
+    element: <Navbar />,
     children: [
       {
         index: true,
-        element: <Home></Home>
+        element: <Home />
       },
       {
         path: 'tests',
-        element: <Tester></Tester>
+        element: <Tester />,
       },
       {
         path: 'documentation',
-        element: <Documentation></Documentation>
+        element: <Documentation />
       }
     ]
   }
