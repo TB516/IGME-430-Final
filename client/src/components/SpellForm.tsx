@@ -40,7 +40,7 @@ export const SpellForm = (props: SpellFormArgs) : React.JSX.Element => {
     setSpell({...spell, requires:updatedReqs});
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
     
     if (Number.isNaN(spell.cost)){
@@ -54,9 +54,9 @@ export const SpellForm = (props: SpellFormArgs) : React.JSX.Element => {
   };
 
   return(
-    <form onSubmit={handleSubmit}>
-      <div id="formNameGroup">
-        <label htmlFor="nameInput">Spell Name:</label>
+    <div>
+      <div id="formNameGroup" className="field">
+        <label htmlFor="nameInput" className="label">Spell Name:</label>
         <input 
           id="nameInput" 
           type="text" 
@@ -66,8 +66,8 @@ export const SpellForm = (props: SpellFormArgs) : React.JSX.Element => {
         />
       </div>
 
-      <div id="formImageGroup">
-        <label htmlFor="imageInput">Spell Image Link:</label>
+      <div id="formImageGroup" className="field">
+        <label htmlFor="imageInput" className="label">Spell Image Link:</label>
         <input 
           id="imageInput" 
           type="text" 
@@ -77,8 +77,8 @@ export const SpellForm = (props: SpellFormArgs) : React.JSX.Element => {
           disabled={(props.method === "GET" || props.method === "Head")} />
       </div>
 
-      <div id="formDescriptionGroup">
-        <label htmlFor="descriptionInput">Spell Description:</label>
+      <div id="formDescriptionGroup" className="field">
+        <label htmlFor="descriptionInput" className="label">Spell Description:</label>
         <input 
           id="descriptionInput" 
           type="text" 
@@ -88,17 +88,19 @@ export const SpellForm = (props: SpellFormArgs) : React.JSX.Element => {
           disabled={(props.method === "GET" || props.method === "Head")} />
       </div>
 
-      <div id="formTypeGroup">
-        <label htmlFor="typeInput">Spell Type:</label>
-        <select id="typeInput" name="type" value={spell.type} onChange={handleFormChangeString} disabled={(props.method === "GET" || props.method === "Head")}>
-          <option value="" defaultChecked disabled></option>
-          <option value="Sorceries">Sorceries</option>
-          <option value="Incantations">Incantations</option>
-        </select>
+      <div id="formTypeGroup" className="field">
+        <label htmlFor="typeInput" className="label">Spell Type:</label>
+        <div className="select">
+          <select id="typeInput" name="type" value={spell.type} onChange={handleFormChangeString} disabled={(props.method === "GET" || props.method === "Head")}>
+            <option value="" defaultChecked disabled></option>
+            <option value="Sorceries">Sorceries</option>
+            <option value="Incantations">Incantations</option>
+          </select>
+        </div>
       </div>
 
-      <div id="formCostGroup">
-        <label htmlFor="costInput">Spell Cost:</label>
+      <div id="formCostGroup" className="field">
+        <label htmlFor="costInput" className="label">Spell Cost:</label>
         <input 
           id="costInput" 
           type="number" 
@@ -108,8 +110,8 @@ export const SpellForm = (props: SpellFormArgs) : React.JSX.Element => {
         />
       </div>
 
-      <div id="formSlotsGroup">
-        <label htmlFor="slotsInput">Number of slots needed:</label>
+      <div id="formSlotsGroup" className="field">
+        <label htmlFor="slotsInput" className="label">Number of slots needed:</label>
         <input 
           id="slotsInput" 
           type="number" 
@@ -119,8 +121,8 @@ export const SpellForm = (props: SpellFormArgs) : React.JSX.Element => {
         />
       </div>
 
-      <div id="formEffectsGroup">
-        <label htmlFor="effectsInput">Spell Effects:</label>
+      <div id="formEffectsGroup" className="field">
+        <label htmlFor="effectsInput" className="label">Spell Effects:</label>
         <input 
           id="effectsInput" 
           type="text" 
@@ -131,8 +133,8 @@ export const SpellForm = (props: SpellFormArgs) : React.JSX.Element => {
       </div>
       
       <div id="formRequiresGroup">
-        <div id="intReqGroup">
-          <label htmlFor="intReqInput">Spell Int Requirement:</label>
+        <div id="intReqGroup" className="field">
+          <label htmlFor="intReqInput" className="label">Spell Int Requirement:</label>
           <input 
             id="intReqInput" 
             type="number" 
@@ -142,8 +144,8 @@ export const SpellForm = (props: SpellFormArgs) : React.JSX.Element => {
             disabled={(props.method === "GET" || props.method === "Head")} />
         </div>
 
-        <div id="faithReqGroup">
-          <label htmlFor="faithReqInput">Spell Faith Requirement:</label>
+        <div id="faithReqGroup" className="field">
+          <label htmlFor="faithReqInput" className="label">Spell Faith Requirement:</label>
           <input 
             id="faithReqInput" 
             type="number" 
@@ -153,8 +155,8 @@ export const SpellForm = (props: SpellFormArgs) : React.JSX.Element => {
             disabled={(props.method === "GET" || props.method === "Head")} />
         </div>
 
-        <div id="arcReqGroup">
-          <label htmlFor="arcReqInput">Spell Arcane Requirement:</label>
+        <div id="arcReqGroup" className="field">
+          <label htmlFor="arcReqInput" className="label">Spell Arcane Requirement:</label>
           <input 
             id="arcReqInput" 
             type="number" 
@@ -165,7 +167,7 @@ export const SpellForm = (props: SpellFormArgs) : React.JSX.Element => {
         </div>
       </div>
 
-      <input type="submit" />
-    </form>
+      <input type="submit" onClick={handleSubmit}/>
+    </div>
   );
 };

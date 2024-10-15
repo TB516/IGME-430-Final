@@ -1,40 +1,45 @@
-import { ISpell, IStatReq } from "elden-ring-types";
-import { SpellForm } from "../components/SpellForm";
 import { EndpointSection } from "../components/EndpointSection";
+import { EndpointTester } from "../components/EndpointTester";
 
 export const Tester = () : React.JSX.Element => {
-  const blankStatReqs = [
-    {
-      name: "Intelligence",
-      amount: 0,
-    },
-    {
-      name: "Faith",
-      amount: 0,
-    },
-    {
-      name: "Arcane",
-      amount: 0,
-    }
-  ] as IStatReq[];
-
-  const blankSpell = {
-    name: "",
-    image: "",
-    description: "",
-    type: "",
-    cost: 0,
-    slots: 0,
-    effects: "",
-    requires: blankStatReqs,
-  } as ISpell;
+  
   return(
     <>
       <main>
         <EndpointSection 
-          endpointName="/api/getSpells" 
+          endpointName="/api/spells" 
           methods={["GET", "HEAD"]} 
-          display={<SpellForm method="GET" spell={blankSpell} ></SpellForm>}>
+          displayElement={<EndpointTester method="GET"></EndpointTester>}>
+        </EndpointSection>
+        <br></br>
+        <EndpointSection 
+          endpointName="/api/spells/reqs" 
+          methods={["GET", "HEAD"]} 
+          displayElement={<EndpointTester method="GET"></EndpointTester>}>
+        </EndpointSection>
+        <br></br>
+        <EndpointSection 
+          endpointName="/api/spells/sorceries" 
+          methods={["GET", "HEAD"]} 
+          displayElement={<EndpointTester method="GET"></EndpointTester>}>
+        </EndpointSection>
+        <br></br>
+        <EndpointSection 
+          endpointName="/api/spells/incantations" 
+          methods={["GET", "HEAD"]} 
+          displayElement={<EndpointTester method="GET"></EndpointTester>}>
+        </EndpointSection>
+        <br></br>
+        <EndpointSection 
+          endpointName="/api/spells/sorceries" 
+          methods={["POST"]} 
+          displayElement={<EndpointTester method="POST"></EndpointTester>}>
+        </EndpointSection>
+        <br></br>
+        <EndpointSection 
+          endpointName="/api/spells/incantations" 
+          methods={["POST"]}
+          displayElement={<EndpointTester method="POST"></EndpointTester>}>
         </EndpointSection>
       </main>
     </>

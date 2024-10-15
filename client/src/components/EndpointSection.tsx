@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { EndpointFormArgs } from "../models/EndpointSectionArgs";
 
-export const EndpointSection = (props: {endpointName: string, methods: string[], display: React.JSX.Element}): React.JSX.Element => {
+export const EndpointSection = (props: EndpointFormArgs): React.JSX.Element => {
   const [expanded, setExpanded] = useState(false);
 
   return(
@@ -13,7 +14,7 @@ export const EndpointSection = (props: {endpointName: string, methods: string[],
       </section>
       {expanded? 
         <section className="section">
-          {props.display}
+          {props.displayElement}
         </section>  
         : 
         <></>
