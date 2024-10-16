@@ -1,6 +1,7 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import { dbQuery } from '../dbQueries';
 import ISpellQuery from '../../../../models/ISpellQuery';
+import { badRequestResponse } from '../../errorResponses';
 
 const getSpellsResponse = async (request: IncomingMessage, response: ServerResponse, queryMethod: dbQuery) => {
   const queryParams = new URL(request.url!, `https://${request.headers.host}`).searchParams;
@@ -14,6 +15,9 @@ const getSpellsResponse = async (request: IncomingMessage, response: ServerRespo
   }
   if (queryParams.get('slots')) {
     spellQuery.slots = Number.parseInt(queryParams.get('slots')!, 10);
+  }
+  if (Number.isNaN(spellQuery.slots) || Number.isNaN(spellQuery.cost)) {
+    return badRequestResponse(request, response, { id: 'invalidParam', message: 'Slots and Cost must be numeric values.' });
   }
 
   const spells = await queryMethod(spellQuery);
