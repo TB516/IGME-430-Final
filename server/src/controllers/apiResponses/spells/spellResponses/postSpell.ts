@@ -20,7 +20,9 @@ const addSpellResponse = async (request: IncomingMessage, response: ServerRespon
 const updateSpellResponse = async (request: IncomingMessage, response: ServerResponse, SpellModel: Model<ISpell>, doc: HydratedDocument<ISpell>) => {
   await SpellModel.findByIdAndUpdate(doc._id, doc);
 
-  response.writeHead(204, 'Updated Spell');
+  response.writeHead(204, 'Updated Spell', {
+    'content-length': 0,
+  });
   return response.end();
 };
 
