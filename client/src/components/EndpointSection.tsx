@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { IEndpointFormArgs } from "../models/IEndpointSectionArgs";
+import { IEndpointSectionArgs } from "../models/IEndpointSectionArgs";
 
-export const EndpointSection = (props: IEndpointFormArgs): React.JSX.Element => {
+export const EndpointSection = (props: IEndpointSectionArgs): React.JSX.Element => {
   const [expanded, setExpanded] = useState(false);
 
   return(
