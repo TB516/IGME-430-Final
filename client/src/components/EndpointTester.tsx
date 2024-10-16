@@ -61,7 +61,7 @@ export const EndpointTester = (props: IEndpointTesterArgs): React.JSX.Element =>
             props.methods.map((method: string, index: number) => (
               <label>
                 {method}
-                <input id={`${method}Radio`} type="radio" name="methodRadio" value={method} onChange={handleRequestMethodChange} defaultChecked={index === 0}></input>
+                <input id={`${method}Radio`} type="radio" name={`methodRadio${props.endpoint}`} value={method} onChange={handleRequestMethodChange} defaultChecked={index === 0}></input>
               </label>
             ))
           }
