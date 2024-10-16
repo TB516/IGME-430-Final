@@ -43,12 +43,13 @@ export const SpellForm = (props: ISpellFormArgs) : React.JSX.Element => {
   const handleSubmit = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
 
-    props.callback(SpellService.GetEndpointResponse(`${spell.type}`, 
+    props.callback(SpellService.RequestEndpointResponse(`${spell.type}`, 
       {
         name: spell.name,
         cost: spell.cost,
         slots: spell.slots,
-      }
+      },
+      props.method
     ));
   };
 
@@ -73,7 +74,7 @@ export const SpellForm = (props: ISpellFormArgs) : React.JSX.Element => {
           name="image" 
           value={spell.image} 
           onChange={handleFormChangeString} 
-          disabled={(props.method === "GET" || props.method === "Head")} />
+          disabled={(props.method === "GET" || props.method === "HEAD")} />
       </div>
 
       <div id="formDescriptionGroup" className="field">
@@ -84,7 +85,7 @@ export const SpellForm = (props: ISpellFormArgs) : React.JSX.Element => {
           name="description" 
           value={spell.description} 
           onChange={handleFormChangeString} 
-          disabled={(props.method === "GET" || props.method === "Head")} />
+          disabled={(props.method === "GET" || props.method === "HEAD")} />
       </div>
 
       <div id="formCostGroup" className="field">
@@ -117,7 +118,7 @@ export const SpellForm = (props: ISpellFormArgs) : React.JSX.Element => {
           name="effects" 
           value={spell.effects} 
           onChange={handleFormChangeString} 
-          disabled={(props.method === "GET" || props.method === "Head")} />
+          disabled={(props.method === "GET" || props.method === "HEAD")} />
       </div>
       
       <div id="formRequiresGroup">
@@ -129,7 +130,7 @@ export const SpellForm = (props: ISpellFormArgs) : React.JSX.Element => {
             name="intReq" 
             value={spell.requires[0].amount} 
             onChange={handleFormReqChange} 
-            disabled={(props.method === "GET" || props.method === "Head")} />
+            disabled={(props.method === "GET" || props.method === "HEAD")} />
         </div>
 
         <div id="faithReqGroup" className="field">
@@ -140,7 +141,7 @@ export const SpellForm = (props: ISpellFormArgs) : React.JSX.Element => {
             name="faithReq" 
             value={spell.requires[1].amount} 
             onChange={handleFormReqChange} 
-            disabled={(props.method === "GET" || props.method === "Head")} />
+            disabled={(props.method === "GET" || props.method === "HEAD")} />
         </div>
 
         <div id="arcReqGroup" className="field">
@@ -151,7 +152,7 @@ export const SpellForm = (props: ISpellFormArgs) : React.JSX.Element => {
             name="arcReq" 
             value={spell.requires[2].amount} 
             onChange={handleFormReqChange} 
-            disabled={(props.method === "GET" || props.method === "Head")} />
+            disabled={(props.method === "GET" || props.method === "HEAD")} />
         </div>
       </div>
 

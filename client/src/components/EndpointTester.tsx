@@ -1,10 +1,11 @@
 import { ISpell, IStatReq } from "elden-ring-types";
 import { SpellForm } from "./SpellForm";
 import { IEndpointTesterArgs } from "../models/IEndpointTesterArgs";
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 
 export const EndpointTester = (props: IEndpointTesterArgs): React.JSX.Element => {
   const [endpointContent, setEndpointContent] = useState('');
+  const [requestMethod, setRequestMethod] = useState(props.methods[0]);
   
   const blankStatReqs = [
     {
@@ -26,8 +27,8 @@ export const EndpointTester = (props: IEndpointTesterArgs): React.JSX.Element =>
     image: "",
     description: "",
     type: "",
-    cost: 0,
-    slots: 0,
+    cost: NaN,
+    slots: NaN,
     effects: "",
     requires: blankStatReqs,
   } as ISpell;
@@ -40,19 +41,35 @@ export const EndpointTester = (props: IEndpointTesterArgs): React.JSX.Element =>
       `
       Status: ${responseData.status}\n
       Content-Length: ${responseData.headers.get('Content-Length')}\n
-      Response: ${jsonString}
+      ${requestMethod === "GET"? `Response: ${jsonString}` : ""}
       `
     );
+  };
+
+  const handleRequestMethodChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setRequestMethod(e.currentTarget.value);
   };
 
   return(
     <div className="columns">
       <div className="firstColumn">
-        <SpellForm method={props.method} spell={blankSpell} callback={handleClick}></SpellForm>
+        <SpellForm method={requestMethod} spell={blankSpell} callback={handleClick}></SpellForm>
       </div>
       <div className="secondColumn field">
-        <label htmlFor="endpointResult" className="label">Endpoint Result</label>
-        <textarea id="endpointResult" value={endpointContent}></textarea>
+        <div>
+          {
+            props.methods.map((method: string, index: number) => (
+              <label>
+                {method}
+                <input id={`${method}Radio`} type="radio" name="methodRadio" value={method} onChange={handleRequestMethodChange} defaultChecked={index === 0}></input>
+              </label>
+            ))
+          }
+        </div>
+        <div>
+          <label htmlFor="endpointResult" className="label">Endpoint Result</label>
+          <textarea id="endpointResult" value={endpointContent}></textarea>
+        </div>
       </div>
     </div>
   );

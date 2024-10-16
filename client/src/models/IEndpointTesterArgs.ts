@@ -1,3 +1,3 @@
 export interface IEndpointTesterArgs{
-  method: string,
+  methods: string[],
 };
