@@ -43,7 +43,12 @@ export const SpellForm = (props: ISpellFormArgs) : React.JSX.Element => {
   const handleSubmit = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
 
-    props.callback(SpellService.RequestEndpointResponse(`${spell.type}`, 
+    if (props.method === 'POST') {
+      spell.type = props.endpoint.split('/').pop()!;
+      return props.callback(SpellService.PostEndpointResponse(`${props.endpoint}`, spell));
+    }
+
+    return props.callback(SpellService.RequestEndpointResponse(`${props.endpoint}`, 
       {
         name: spell.name,
         cost: spell.cost,

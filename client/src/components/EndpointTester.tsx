@@ -41,7 +41,7 @@ export const EndpointTester = (props: IEndpointTesterArgs): React.JSX.Element =>
       `
       Status: ${responseData.status}\n
       Content-Length: ${responseData.headers.get('Content-Length')}\n
-      ${requestMethod === "GET"? `Response: ${jsonString}` : ""}
+      ${requestMethod !== "HEAD"? `Response: ${jsonString}` : ""}
       `
     );
   };
@@ -53,7 +53,7 @@ export const EndpointTester = (props: IEndpointTesterArgs): React.JSX.Element =>
   return(
     <div className="columns">
       <div className="firstColumn">
-        <SpellForm method={requestMethod} spell={blankSpell} callback={handleClick}></SpellForm>
+        <SpellForm endpoint={props.endpoint} method={requestMethod} spell={blankSpell} callback={handleClick}></SpellForm>
       </div>
       <div className="secondColumn field">
         <div>
