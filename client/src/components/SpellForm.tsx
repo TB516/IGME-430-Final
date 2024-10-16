@@ -42,15 +42,8 @@ export const SpellForm = (props: ISpellFormArgs) : React.JSX.Element => {
 
   const handleSubmit = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
-    
-    if (Number.isNaN(spell.cost)){
-      setSpell({...spell, cost: 0});
-    }
-    if (Number.isNaN(spell.slots)){
-      setSpell({...spell, slots: 0});
-    }
 
-    props.callback(SpellService.GetEndpointResponse(`/${spell.type}`, 
+    props.callback(SpellService.GetEndpointResponse(`${spell.type}`, 
       {
         name: spell.name,
         cost: spell.cost,
