@@ -48,7 +48,7 @@ export const SpellForm = (props: ISpellFormArgs) : React.JSX.Element => {
       return props.callback(SpellService.PostEndpointResponse(`${props.endpoint}`, spell));
     }
 
-    return props.callback(SpellService.RequestEndpointResponse(`${props.endpoint}`, 
+    return props.callback(SpellService.GetEndpointResponse(`${props.endpoint}`, 
       {
         name: spell.name,
         cost: spell.cost,
