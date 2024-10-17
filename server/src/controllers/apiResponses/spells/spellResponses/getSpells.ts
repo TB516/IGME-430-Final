@@ -3,6 +3,13 @@ import { dbQuery } from '../dbQueries';
 import ISpellQuery from '../../../../models/ISpellQuery';
 import { badRequestResponse } from '../../errorResponses';
 
+/**
+ * Searches database based on query parameters and responds with all matching spells
+ * @param request request object
+ * @param response response object
+ * @param queryMethod callback method to query the specific model
+ * @returns
+ */
 const getSpellsResponse = async (request: IncomingMessage, response: ServerResponse, queryMethod: dbQuery) => {
   const queryParams = new URL(request.url!, `https://${request.headers.host}`).searchParams;
   const spellQuery = {} as ISpellQuery;

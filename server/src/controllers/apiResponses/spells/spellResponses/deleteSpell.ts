@@ -4,6 +4,14 @@ import { ISpell } from 'elden-ring-types';
 import { postTypeUnsupportedResponse, resourceNotFoundResponse } from '../../errorResponses';
 import { parseJson, parseUrlencoded } from '../../../../models/utils/parsers';
 
+/**
+ * Searches in database for a spell and deletes it
+ * @param request request object
+ * @param response response object
+ * @param SpellModel spell model to look for body object in
+ * @param body object to delete
+ * @returns
+ */
 const deleteSpellResponse = async (request: IncomingMessage, response: ServerResponse, SpellModel: Model<ISpell>, body: ISpell) => {
   const exists = await SpellModel.exists({ name: body.name });
 
@@ -20,6 +28,12 @@ const deleteSpellResponse = async (request: IncomingMessage, response: ServerRes
   });
 };
 
+/**
+ * Parses body and responds with deleted spell response
+ * @param request request object
+ * @param response response object
+ * @param SpellModel spellModel to look for body object in
+ */
 const deleteSpellHandler = async (request: IncomingMessage, response: ServerResponse, SpellModel: Model<ISpell>) => {
   let body = '';
 

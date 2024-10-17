@@ -1,6 +1,12 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import IErrorMessage from '../../../models/IErrorMessage';
 
+/**
+ * Responds with a 404 resource not found status.
+ * @param _request request object
+ * @param response response object
+ * @param message message to send
+ */
 const resourceNotFoundResponse = (_request: IncomingMessage, response: ServerResponse, message: IErrorMessage) => {
   const messageJson = JSON.stringify(message);
 
@@ -13,6 +19,12 @@ const resourceNotFoundResponse = (_request: IncomingMessage, response: ServerRes
   response.end();
 };
 
+/**
+ * Responds with a 404 endpoint not found status specifying that the requested API endpoint doesnt exist.
+ * @param request request object
+ * @param response response object
+ * @returns
+ */
 const endpointNotFoundResponse = (request: IncomingMessage, response: ServerResponse) => {
   return resourceNotFoundResponse(request, response, {
     id: 'endpointNotFound',
