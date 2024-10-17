@@ -4,6 +4,12 @@ import { deleteSpellHandler, getSpellsResponse, postSpellHandler } from './spell
 import { getIncantationMatches } from './dbQueries';
 import { Incantations } from '../../../models/Spell';
 
+/**
+ * Handles method and redirects to correct response
+ * @param request request object
+ * @param response response object
+ * @returns
+ */
 const incantationsResponse = async (request: IncomingMessage, response: ServerResponse) => {
   if (request.method === 'HEAD' || request.method === 'GET') {
     return getSpellsResponse(request, response, getIncantationMatches);

@@ -19,18 +19,33 @@ const index = fs.readFileSync(htmlPath);
 const css = fs.readFileSync(cssPath);
 const js = fs.readFileSync(bundlePath);
 
+/**
+ * returns index html file
+ * @param _request
+ * @param response
+ */
 const getIndexHtml = (_request: IncomingMessage, response: ServerResponse) => {
   response.writeHead(200, { 'Content-Type': 'text/html' });
   response.write(index);
   response.end();
 };
 
+/**
+ * return index css file
+ * @param _request
+ * @param response
+ */
 const getIndexCss = (_request: IncomingMessage, response: ServerResponse) => {
   response.writeHead(200, { 'Content-Type': 'text/css' });
   response.write(css);
   response.end();
 };
 
+/**
+ * returns index js file
+ * @param _request
+ * @param response
+ */
 const getIndexJs = (_request: IncomingMessage, response: ServerResponse) => {
   response.writeHead(200, { 'Content-Type': 'text/javascript' });
   response.write(js);
