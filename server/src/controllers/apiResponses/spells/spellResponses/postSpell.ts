@@ -22,6 +22,7 @@ const updateSpellResponse = async (request: IncomingMessage, response: ServerRes
 
   response.writeHead(204, 'Updated Spell', {
     'content-length': 0,
+    'content-type': 'null',
   });
   return response.end();
 };
