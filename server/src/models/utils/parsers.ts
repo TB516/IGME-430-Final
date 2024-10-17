@@ -1,7 +1,11 @@
 import { ISpell } from 'elden-ring-types';
 
 const parseJson = (content: string) : ISpell => {
-  return JSON.parse(content) as ISpell;
+  try {
+    return JSON.parse(content) as ISpell;
+  } catch {
+    return {} as ISpell;
+  }
 };
 
 const parseUrlencoded = (content: string): ISpell => {
