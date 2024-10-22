@@ -1,9 +1,9 @@
-import spellsResponse from './spellsResponse';
-import incantationsResponse from './incantationsResponse';
-import sorceriesResponse from './sorceriesResponse';
+import incantationsRouter from './incantationsRouter';
+import sorceriesRouter from './sorceriesRouter';
+import spellsRouter from './spellsRouter';
 
 export {
-  spellsResponse,
-  incantationsResponse,
-  sorceriesResponse,
+  spellsRouter,
+  sorceriesRouter,
+  incantationsRouter,
 };

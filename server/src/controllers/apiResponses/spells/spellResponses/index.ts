@@ -1,5 +1,5 @@
-import deleteSpellHandler from './deleteSpell';
+import deleteSpellResponse from './deleteSpell';
 import getSpellsResponse from './getSpells';
-import postSpellHandler from './postSpell';
+import postSpellResponse from './postSpell';
 
-export { getSpellsResponse, postSpellHandler, deleteSpellHandler };
+export { getSpellsResponse, postSpellResponse, deleteSpellResponse };

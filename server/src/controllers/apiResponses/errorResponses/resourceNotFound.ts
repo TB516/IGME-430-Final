@@ -1,4 +1,4 @@
-import { IncomingMessage, ServerResponse } from 'http';
+import { Request, Response } from 'express';
 import IErrorMessage from '../../../models/IErrorMessage';
 
 /**
@@ -7,16 +7,8 @@ import IErrorMessage from '../../../models/IErrorMessage';
  * @param response response object
  * @param message message to send
  */
-const resourceNotFoundResponse = (_request: IncomingMessage, response: ServerResponse, message: IErrorMessage) => {
-  const messageJson = JSON.stringify(message);
-
-  response.writeHead(404, 'Resource Not Found', {
-    'content-type': 'application/json',
-    'content-length': Buffer.byteLength(messageJson, 'utf8'),
-  });
-
-  response.write(messageJson);
-  response.end();
+const resourceNotFoundResponse = (_request: Request, response: Response, message: IErrorMessage) => {
+  response.status(404).json(message);
 };
 
 /**
@@ -25,7 +17,7 @@ const resourceNotFoundResponse = (_request: IncomingMessage, response: ServerRes
  * @param response response object
  * @returns
  */
-const endpointNotFoundResponse = (request: IncomingMessage, response: ServerResponse) => {
+const endpointNotFoundResponse = (request: Request, response: Response) => {
   return resourceNotFoundResponse(request, response, {
     id: 'endpointNotFound',
     message: `The requested endpoint of ${request.url} was not found.`,

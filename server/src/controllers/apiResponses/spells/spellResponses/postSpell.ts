@@ -1,8 +1,7 @@
-import { IncomingMessage, ServerResponse } from 'http';
+import { Request, Response } from 'express';
 import { HydratedDocument, Model } from 'mongoose';
 import { ISpell } from 'elden-ring-types';
 import { badRequestResponse, postTypeUnsupportedResponse } from '../../errorResponses';
-import { parseJson, parseUrlencoded } from '../../../../models/utils/parsers';
 
 /**
  * Adds spell and responds with spell that was just added
@@ -12,17 +11,10 @@ import { parseJson, parseUrlencoded } from '../../../../models/utils/parsers';
  * @param doc document version of spell
  * @returns
  */
-const addSpellResponse = async (request: IncomingMessage, response: ServerResponse, SpellModel: Model<ISpell>, doc: HydratedDocument<ISpell>) => {
+const addSpellResponse = async (request: Request, response: Response, SpellModel: Model<ISpell>, doc: HydratedDocument<ISpell>) => {
   await SpellModel.create(doc);
 
-  const jsonString = JSON.stringify(doc as ISpell);
-
-  response.writeHead(201, 'Created Spell', {
-    'content-type': 'application/json',
-    'content-length': Buffer.byteLength(jsonString, 'utf-8'),
-  });
-  response.write(jsonString);
-  return response.end();
+  response.status(201).json(doc as ISpell);
 };
 
 /**
@@ -33,14 +25,10 @@ const addSpellResponse = async (request: IncomingMessage, response: ServerRespon
  * @param doc document version of spell to update
  * @returns
  */
-const updateSpellResponse = async (request: IncomingMessage, response: ServerResponse, SpellModel: Model<ISpell>, doc: HydratedDocument<ISpell>) => {
+const updateSpellResponse = async (request: Request, response: Response, SpellModel: Model<ISpell>, doc: HydratedDocument<ISpell>) => {
   await SpellModel.findByIdAndUpdate(doc._id, doc);
 
-  response.writeHead(204, 'Updated Spell', {
-    'content-length': 0,
-    'content-type': 'null',
-  });
-  return response.end();
+  response.status(204).send();
 };
 
 /**
@@ -48,48 +36,30 @@ const updateSpellResponse = async (request: IncomingMessage, response: ServerRes
  * @param request request object
  * @param response response object
  * @param SpellModel model to post to
- * @param body spell to add
  * @returns
  */
-const postSpellResponse = async (request: IncomingMessage, response: ServerResponse, SpellModel: Model<ISpell>, body: ISpell) => {
-  const exists = await SpellModel.exists({ name: body.name });
-  const doc = new SpellModel(body);
+const postSpellResponse = async (request: Request, response: Response, SpellModel: Model<ISpell>) => {
+  if (request.headers['content-type'] !== 'application/json' && request.headers['content-type'] !== 'application/x-www-form-urlencoded') {
+    postTypeUnsupportedResponse(request, response);
+    return;
+  }
+
+  const spell = request.body as ISpell;
+  const exists = await SpellModel.exists({ name: spell.name });
+  const doc = new SpellModel(spell);
   const errors = doc.validateSync();
 
   if (errors) {
-    return badRequestResponse(request, response, { id: 'badRequest', message: errors.message });
+    badRequestResponse(request, response, { id: 'badRequest', message: errors.message });
+    return;
   }
 
   if (exists) {
     doc._id = exists._id;
-    return updateSpellResponse(request, response, SpellModel, doc);
+    updateSpellResponse(request, response, SpellModel, doc);
+    return;
   }
-  return addSpellResponse(request, response, SpellModel, doc);
+  addSpellResponse(request, response, SpellModel, doc);
 };
 
-/**
- * Gets request body and initiates post response
- * @param request request object
- * @param response response object
- * @param SpellModel model to post to
- */
-const postSpellHandler = async (request: IncomingMessage, response: ServerResponse, SpellModel: Model<ISpell>) => {
-  let body = '';
-
-  request.on('data', (chunk) => {
-    body += chunk.toString();
-  });
-
-  request.on('end', () => {
-    if (request.headers['content-type'] === 'application/json') {
-      return postSpellResponse(request, response, SpellModel, parseJson(body));
-    }
-    if (request.headers['content-type'] === 'application/x-www-form-urlencoded') {
-      return postSpellResponse(request, response, SpellModel, parseUrlencoded(body));
-    }
-
-    return postTypeUnsupportedResponse(request, response);
-  });
-};
-
-export default postSpellHandler;
+export default postSpellResponse;

@@ -1,4 +1,4 @@
-import { IncomingMessage, ServerResponse } from 'http';
+import { Request, Response } from 'express';
 import IErrorMessage from '../../../models/IErrorMessage';
 
 /**
@@ -8,17 +8,9 @@ import IErrorMessage from '../../../models/IErrorMessage';
  * @param message message to send
  * @param acceptedTypes content types the point accepts
  */
-const unsupportedTypeResponse = (_request: IncomingMessage, response: ServerResponse, message: IErrorMessage, acceptedTypes: string[]) => {
-  const messageJson = JSON.stringify(message);
-
-  response.writeHead(415, 'Unsupported Media Type', {
-    'content-type': 'application/json',
-    'content-length': Buffer.byteLength(messageJson, 'utf8'),
-    'accept-encoding': acceptedTypes,
-  });
-
-  response.write(messageJson);
-  response.end();
+const unsupportedTypeResponse = (_request: Request, response: Response, message: IErrorMessage, acceptedTypes: string[]) => {
+  response.setHeader('accept-encoding', acceptedTypes);
+  response.status(415).json(message);
 };
 
 /**
@@ -27,7 +19,7 @@ const unsupportedTypeResponse = (_request: IncomingMessage, response: ServerResp
  * @param response response object
  * @returns
  */
-const postTypeUnsupportedResponse = (_request: IncomingMessage, response: ServerResponse) => {
+const postTypeUnsupportedResponse = (_request: Request, response: Response) => {
   return unsupportedTypeResponse(
     _request,
     response,

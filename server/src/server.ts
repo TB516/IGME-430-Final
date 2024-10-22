@@ -1,42 +1,29 @@
-import http, { IncomingMessage, ServerResponse } from 'http';
+import express from 'express';
 import mongoose from 'mongoose';
-import { getIndexCss, getIndexHtml, getIndexJs } from './controllers/htmlResponses';
-import {
-  spellsResponse,
-  sorceriesResponse,
-  incantationsResponse,
-} from './controllers/apiResponses/spells';
-import { endpointNotFoundResponse } from './controllers/apiResponses/errorResponses';
+import compression from 'compression';
+import path from 'path';
+import apiRouter from './controllers/apiResponses';
 
 require('dotenv').config();
 
-// eslint-disable-next-line no-unused-vars, max-len
-type ResponseMethod = (request: IncomingMessage, response: ServerResponse) => void;
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
-const routes: Record<string, ResponseMethod> = {
-  '/': getIndexHtml,
-  '/assets/index.css': getIndexCss,
-  '/assets/index.js': getIndexJs,
-  '/api/spells': spellsResponse,
-  '/api/spells/sorceries': sorceriesResponse,
-  '/api/spells/incantations': incantationsResponse,
-};
+const app = express();
 
-const onRequest = (request: IncomingMessage, response: ServerResponse) => {
-  const parsedUrl = new URL(request.url!, `https://${request.headers.host}`);
+app.use(compression());
 
-  if (routes[parsedUrl.pathname]) {
-    return routes[parsedUrl.pathname](request, response);
-  }
-  if (parsedUrl.pathname.startsWith('/api/')) {
-    return endpointNotFoundResponse(request, response);
-  }
+if (process.env.NODE_ENV === 'production') {
+  app.use('/', express.static(path.resolve(`${__dirname}/../client/`)));
+} else {
+  app.use('/', express.static(path.resolve(`${__dirname}/../../dist/client/`)));
+}
 
-  return routes['/'](request, response);
-};
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use('/api', apiRouter);
 
 mongoose.connect(process.env.MONGODB_URI!).catch((err) => { console.log(err); });
 
-http.createServer(onRequest).listen(port, () => {
-  console.log(`Listening on port:${port}`);
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
 });
