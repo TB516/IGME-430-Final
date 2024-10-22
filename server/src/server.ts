@@ -2,7 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import compression from 'compression';
 import path from 'path';
-import apiRouter from './controllers/apiResponses';
+import apiRouter from './controllers/api';
 
 require('dotenv').config();
 
