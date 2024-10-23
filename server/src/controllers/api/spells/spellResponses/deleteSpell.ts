@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { Model } from 'mongoose';
 import { ISpell } from 'elden-ring-types';
-import { postTypeUnsupportedResponse, resourceNotFoundResponse } from '../../errorResponses';
+import { resourceNotFoundResponse } from '../../errorResponses';
 
 /**
  * Searches in database for a spell and deletes it
@@ -12,13 +12,7 @@ import { postTypeUnsupportedResponse, resourceNotFoundResponse } from '../../err
  * @returns
  */
 const deleteSpellResponse = async (request: Request, response: Response, SpellModel: Model<ISpell>) => {
-  if (request.headers['content-type'] !== 'application/json' && request.headers['content-type'] !== 'application/x-www-form-urlencoded') {
-    postTypeUnsupportedResponse(request, response);
-    return;
-  }
-
-  const spell = request.body as ISpell;
-  const exists = await SpellModel.exists({ name: spell.name });
+  const exists = await SpellModel.exists({ name: request.query.name });
 
   if (exists) {
     await SpellModel.findByIdAndDelete(exists._id);
@@ -29,7 +23,7 @@ const deleteSpellResponse = async (request: Request, response: Response, SpellMo
 
   resourceNotFoundResponse(request, response, {
     id: 'resourceNotFound',
-    message: `'${spell.name}' was not found.`,
+    message: `'${request.query.name}' was not found.`,
   });
 };
 
