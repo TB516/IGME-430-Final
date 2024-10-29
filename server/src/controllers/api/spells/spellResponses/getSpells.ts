@@ -30,8 +30,7 @@ const getSpellsResponse = async (request: Request, response: Response, queryMeth
 
   const spells = await queryMethod(spellQuery);
 
-  response.status(200);
-  response.json(spells);
+  response.status(200).json(spells);
 };
 
 export default getSpellsResponse;

@@ -14,17 +14,17 @@ import { resourceNotFoundResponse } from '../../errorResponses';
 const deleteSpellResponse = async (request: Request, response: Response, SpellModel: Model<ISpell>) => {
   const exists = await SpellModel.exists({ name: request.query.name });
 
-  if (exists) {
-    await SpellModel.findByIdAndDelete(exists._id);
-
-    response.status(204).send();
+  if (!exists) {
+    resourceNotFoundResponse(request, response, {
+      id: 'resourceNotFound',
+      message: `'${request.query.name}' was not found.`,
+    });
     return;
   }
 
-  resourceNotFoundResponse(request, response, {
-    id: 'resourceNotFound',
-    message: `'${request.query.name}' was not found.`,
-  });
+  await SpellModel.findByIdAndDelete(exists._id);
+
+  response.status(204).send();
 };
 
 export default deleteSpellResponse;
