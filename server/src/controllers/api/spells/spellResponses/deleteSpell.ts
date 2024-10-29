@@ -12,12 +12,12 @@ import { resourceNotFoundResponse } from '../../errorResponses';
  * @returns
  */
 const deleteSpellResponse = async (request: Request, response: Response, SpellModel: Model<ISpell>) => {
-  const exists = await SpellModel.exists({ name: request.query.name });
+  const exists = await SpellModel.exists({ name: request.params.name });
 
   if (!exists) {
     resourceNotFoundResponse(request, response, {
       id: 'resourceNotFound',
-      message: `'${request.query.name}' was not found.`,
+      message: `'${request.params.name}' was not found.`,
     });
     return;
   }

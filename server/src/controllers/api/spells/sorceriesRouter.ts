@@ -35,7 +35,7 @@ const notAllowedSorceries = (request: Request, response: Response) => {
 sorceriesRouter.get('/', getSorceries);
 sorceriesRouter.get('/:name', getSorcery);
 sorceriesRouter.post('/', postSorceries);
-sorceriesRouter.delete('/', deleteSorceries);
+sorceriesRouter.delete('/:name', deleteSorceries);
 sorceriesRouter.all('/', notAllowedSorceries);
 
 export default sorceriesRouter;

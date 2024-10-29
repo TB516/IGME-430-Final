@@ -35,7 +35,7 @@ const notAllowedIncantations = (request: Request, response: Response) => {
 incantationsRouter.get('/', getIncantations);
 incantationsRouter.get('/:name', getIncantation);
 incantationsRouter.post('/', postIncantations);
-incantationsRouter.delete('/', deleteIncantations);
+incantationsRouter.delete('/:name', deleteIncantations);
 incantationsRouter.all('/', notAllowedIncantations);
 
 export default incantationsRouter;
