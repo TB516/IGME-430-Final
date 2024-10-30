@@ -6,7 +6,7 @@ import {
   postSpellResponse,
 } from './spellResponses';
 import { getIncantationMatches } from './dbQueries';
-import { methodNotAllowedResponse } from '../errorResponses';
+import { endpointNotFoundResponse, methodNotAllowedResponse } from '../errorResponses';
 import { Incantations } from '../../../models/Spell';
 
 const incantationsRouter = Router();
@@ -36,6 +36,7 @@ incantationsRouter.get('/', getIncantations);
 incantationsRouter.get('/:name', getIncantation);
 incantationsRouter.post('/', postIncantations);
 incantationsRouter.delete('/:name', deleteIncantations);
-incantationsRouter.all('/', notAllowedIncantations);
+incantationsRouter.all('/:route', endpointNotFoundResponse);
+incantationsRouter.all('*', notAllowedIncantations);
 
 export default incantationsRouter;

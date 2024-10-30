@@ -6,7 +6,7 @@ import {
   postSpellResponse,
 } from './spellResponses';
 import { getSorceryMatches } from './dbQueries';
-import { methodNotAllowedResponse } from '../errorResponses';
+import { endpointNotFoundResponse, methodNotAllowedResponse } from '../errorResponses';
 import { Sorceries } from '../../../models/Spell';
 
 const sorceriesRouter = Router();
@@ -36,6 +36,7 @@ sorceriesRouter.get('/', getSorceries);
 sorceriesRouter.get('/:name', getSorcery);
 sorceriesRouter.post('/', postSorceries);
 sorceriesRouter.delete('/:name', deleteSorceries);
-sorceriesRouter.all('/', notAllowedSorceries);
+sorceriesRouter.all('/:route', endpointNotFoundResponse);
+sorceriesRouter.all('*', notAllowedSorceries);
 
 export default sorceriesRouter;
