@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 import { resourceNotFoundResponse } from '../../errorResponses';
 
 const getSpellResponse = async (request: Request, response: Response, SpellModel: Model<ISpell>) => {
-  const exists = await SpellModel.exists({ name: request.params.name });
+  const exists = await SpellModel.exists({ name: RegExp(`(?:^|,)(${request.params.name})(?:,|$)`, 'i') });
 
   if (!exists) {
     resourceNotFoundResponse(request, response, {
