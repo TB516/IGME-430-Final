@@ -15,22 +15,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 if (process.env.NODE_ENV === 'production') {
-  app.use('/assets', express.static(path.resolve(`${__dirname}/../client/assets`)));
-  app.use(favicon(path.resolve(`${__dirname}/../client/favicon.png`)));
+  app.use('/assets', express.static(path.resolve(`${__dirname}/../api-viewer/assets`)));
+  app.use(favicon(path.resolve(`${__dirname}/../api-viewer/favicon.png`)));
 } else {
-  app.use('/assets', express.static(path.resolve(`${__dirname}/../../dist/client/assets`)));
-  app.use(favicon(path.resolve(`${__dirname}/../../dist/client/favicon.png`)));
+  app.use('/assets', express.static(path.resolve(`${__dirname}/../../dist/api-viewer/assets`)));
+  app.use(favicon(path.resolve(`${__dirname}/../../dist/api-viewer/favicon.png`)));
 }
 
 app.use('/api', apiRouter);
 
 if (process.env.NODE_ENV === 'production') {
   app.get('*', (_request: Request, response: Response) => {
-    response.sendFile(path.resolve(`${__dirname}/../client/index.html`));
+    response.sendFile(path.resolve(`${__dirname}/../api-viewer/index.html`));
   });
 } else {
   app.get('*', (_request: Request, response: Response) => {
-    response.sendFile(path.resolve(`${__dirname}/../../dist/client/index.html`));
+    response.sendFile(path.resolve(`${__dirname}/../../dist/api-viewer/index.html`));
   });
 }
 

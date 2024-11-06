@@ -24,7 +24,49 @@ importers:
         specifier: ^2.5.0
         version: 2.5.0
 
-  client:
+  api:
+    devDependencies:
+      '@types/compression':
+        specifier: ^1.7.5
+        version: 1.7.5
+      '@types/express':
+        specifier: ^5.0.0
+        version: 5.0.0
+      '@types/node':
+        specifier: ^22.7.5
+        version: 22.8.4
+      '@types/serve-favicon':
+        specifier: ^2.5.7
+        version: 2.5.7
+      '@typescript-eslint/eslint-plugin':
+        specifier: ^8.8.1
+        version: 8.12.2(@typescript-eslint/parser@8.12.2(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1)(typescript@5.6.3)
+      '@typescript-eslint/parser':
+        specifier: ^8.8.1
+        version: 8.12.2(eslint@8.57.1)(typescript@5.6.3)
+      dotenv:
+        specifier: ^16.4.5
+        version: 16.4.5
+      elden-ring-types:
+        specifier: workspace:*
+        version: link:../packages/elden-ring-types
+      eslint:
+        specifier: ^8.57.1
+        version: 8.57.1
+      eslint-config-airbnb:
+        specifier: ^19.0.4
+        version: 19.0.4(eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.12.2(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1))(eslint-plugin-jsx-a11y@6.10.2(eslint@8.57.1))(eslint-plugin-react-hooks@5.1.0-rc-fb9a90fa48-20240614(eslint@8.57.1))(eslint-plugin-react@7.37.2(eslint@8.57.1))(eslint@8.57.1)
+      nodemon:
+        specifier: ^3.1.7
+        version: 3.1.7
+      tsx:
+        specifier: ^4.19.1
+        version: 4.19.2
+      typescript:
+        specifier: ^5.6.3
+        version: 5.6.3
+
+  api-viewer:
     devDependencies:
       '@eslint/js':
         specifier: ^9.11.1
@@ -73,48 +115,6 @@ importers:
         version: 5.4.10(@types/node@22.8.4)
 
   packages/elden-ring-types: {}
-
-  server:
-    devDependencies:
-      '@types/compression':
-        specifier: ^1.7.5
-        version: 1.7.5
-      '@types/express':
-        specifier: ^5.0.0
-        version: 5.0.0
-      '@types/node':
-        specifier: ^22.7.5
-        version: 22.8.4
-      '@types/serve-favicon':
-        specifier: ^2.5.7
-        version: 2.5.7
-      '@typescript-eslint/eslint-plugin':
-        specifier: ^8.8.1
-        version: 8.12.2(@typescript-eslint/parser@8.12.2(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1)(typescript@5.6.3)
-      '@typescript-eslint/parser':
-        specifier: ^8.8.1
-        version: 8.12.2(eslint@8.57.1)(typescript@5.6.3)
-      dotenv:
-        specifier: ^16.4.5
-        version: 16.4.5
-      elden-ring-types:
-        specifier: workspace:*
-        version: link:../packages/elden-ring-types
-      eslint:
-        specifier: ^8.57.1
-        version: 8.57.1
-      eslint-config-airbnb:
-        specifier: ^19.0.4
-        version: 19.0.4(eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.12.2(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1))(eslint-plugin-jsx-a11y@6.10.2(eslint@8.57.1))(eslint-plugin-react-hooks@5.1.0-rc-fb9a90fa48-20240614(eslint@8.57.1))(eslint-plugin-react@7.37.2(eslint@8.57.1))(eslint@8.57.1)
-      nodemon:
-        specifier: ^3.1.7
-        version: 3.1.7
-      tsx:
-        specifier: ^4.19.1
-        version: 4.19.2
-      typescript:
-        specifier: ^5.6.3
-        version: 5.6.3
 
 packages:
 

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node dist/server/server.js",
+    "start": "node dist/api/server.js",
     "build": "pnpm run -r build",
     "dev": "pnpm run --parallel projectDev",
     "pretest": "pnpm run -r lint",
