@@ -1,7 +1,7 @@
 interface ISpellQuery{
   name: string | RegExp,
-  cost: number,
-  slots: number,
+  fp: number,
+  slot: number,
 }
 
 export default ISpellQuery;

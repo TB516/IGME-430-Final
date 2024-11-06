@@ -17,13 +17,13 @@ const getSpellsResponse = async (request: Request, response: Response, queryMeth
   if (queryParams.name) {
     spellQuery.name = new RegExp(queryParams.name.toString(), 'i');
   }
-  if (queryParams.cost) {
-    spellQuery.cost = Number.parseInt(queryParams.cost.toString(), 10);
+  if (queryParams.fp) {
+    spellQuery.fp = Number.parseInt(queryParams.fp.toString(), 10);
   }
-  if (queryParams.slots) {
-    spellQuery.slots = Number.parseInt(queryParams.slots.toString(), 10);
+  if (queryParams.slot) {
+    spellQuery.slot = Number.parseInt(queryParams.slot.toString(), 10);
   }
-  if (Number.isNaN(spellQuery.slots) || Number.isNaN(spellQuery.cost)) {
+  if (Number.isNaN(spellQuery.slot) || Number.isNaN(spellQuery.fp)) {
     badRequestResponse(request, response, { id: 'invalidParam', message: 'Slots and Cost must be numeric values.' });
     return;
   }

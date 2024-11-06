@@ -1,16 +1,19 @@
 import { ObjectId } from 'mongoose';
-import IStatReq from './IStatReq';
 
 interface ISpell{
   _id: ObjectId,
   name: string,
   image: string,
   description: string,
-  type: string,
-  cost: number,
-  slots: number,
-  effects: string,
-  requires: IStatReq[],
+  effect: string,
+  fp: string,
+  slot: number,
+  int: number,
+  faith: number,
+  arc: number,
+  bonus: string,
+  location: string,
+  stamina: number
 }
 
 export default ISpell;

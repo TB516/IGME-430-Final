@@ -1,26 +1,20 @@
 import { model, Schema } from 'mongoose';
-import { ISpell, IStatReq } from 'elden-ring-types';
-
-const reqSchema = new Schema<IStatReq>(
-  {
-    name: { type: String, required: true },
-    amount: { type: Number, required: true },
-  },
-  {
-    versionKey: false,
-  },
-);
+import { ISpell } from 'elden-ring-types';
 
 const spellSchema = new Schema<ISpell>(
   {
     name: { type: String, required: true, unique: true },
     image: { type: String, required: true },
     description: { type: String, required: true },
-    type: { type: String, required: true },
-    cost: { type: Number, required: true },
-    slots: { type: Number, required: true },
-    effects: { type: String, required: true },
-    requires: { type: [reqSchema], required: true },
+    effect: { type: String, required: true },
+    fp: { type: String, required: true },
+    slot: { type: Number, required: true },
+    int: { type: Number, required: true },
+    faith: { type: Number, required: true },
+    arc: { type: Number, required: true },
+    bonus: { type: String, required: true },
+    location: { type: String, required: true },
+    stamina: { type: Number, required: true },
   },
   {
     versionKey: false,
