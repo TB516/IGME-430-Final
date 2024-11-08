@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import { ISpell } from 'elden-ring-types';
+import ISpell from './ISpell';
 
 const spellSchema = new Schema<ISpell>(
   {

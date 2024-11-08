@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { HydratedDocument, Model } from 'mongoose';
-import { ISpell } from 'elden-ring-types';
+import ISpell from '../../../../models/ISpell';
 import { badRequestResponse, postTypeUnsupportedResponse } from '../../errorResponses';
 
 /**

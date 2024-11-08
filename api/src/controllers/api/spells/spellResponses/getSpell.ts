@@ -1,4 +1,4 @@
-import { ISpell } from 'elden-ring-types';
+import ISpell from '../../../../models/ISpell';
 import { Request, Response } from 'express';
 import { Model } from 'mongoose';
 import { resourceNotFoundResponse } from '../../errorResponses';

@@ -1,4 +1,4 @@
-import { ISpell } from 'elden-ring-types';
+import ISpell from '../../../models/ISpell';
 import ISpellQuery from '../../../models/ISpellQuery';
 import { Incantations, Sorceries } from '../../../models/Spell';
 

@@ -1,6 +1,0 @@
-{
-  "name": "elden-ring-types",
-  "private": true,
-  "main": "src/index.ts",
-  "files": ["src/index.ts"]
-}

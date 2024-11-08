@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { Model } from 'mongoose';
-import { ISpell } from 'elden-ring-types';
+import ISpell from '../../../../models/ISpell';
 import { resourceNotFoundResponse } from '../../errorResponses';
 
 /**
