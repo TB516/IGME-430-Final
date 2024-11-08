@@ -3,12 +3,13 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "files": ["dist", "nginx/nginx.conf"],
   "scripts": {
-    "projectDev": "vite build --watch",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "pnpm run lint && echo \"Tests Complete!\""
   },
   "devDependencies": {
     "@eslint/js": "^9.11.1",

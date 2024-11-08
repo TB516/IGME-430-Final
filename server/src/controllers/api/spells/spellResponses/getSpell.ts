@@ -1,6 +1,6 @@
-import ISpell from '../../../../models/ISpell';
 import { Request, Response } from 'express';
 import { Model } from 'mongoose';
+import ISpell from '../../../../models/ISpell';
 import { resourceNotFoundResponse } from '../../errorResponses';
 
 const getSpellResponse = async (request: Request, response: Response, SpellModel: Model<ISpell>) => {
