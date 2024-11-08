@@ -1,4 +1,3 @@
 packages:
-- api-viewer
-- api
-- "packages/*"
+- client
+- server
