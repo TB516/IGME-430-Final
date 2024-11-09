@@ -1,4 +1,4 @@
-#Client build: 
+#Client deploy: 
     - pnpm --filter client build:image
     - heroku login
     - heroku container:login
@@ -6,7 +6,7 @@
     - heroku container:release web --app=elden-ring-app
 
 
-#Client build: 
+#Server deploy: 
     - pnpm --filter server build:image
     - heroku login
     - heroku container:login
