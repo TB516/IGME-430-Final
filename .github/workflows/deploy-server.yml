@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: elden-ring-api
-      url: api.eldenring.thomasberrios.com
+      url: https://api.eldenring.thomasberrios.com/
     steps:
       # Check-out your repository.
       - name: Checkout
