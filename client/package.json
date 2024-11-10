@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "build:image": "cd ../ && docker build . --target client --tag registry.heroku.com/elden-ring-app/web --provenance=false",
+    "build:image": "cd ../ && docker build . --file=Dockerfile.client --tag=registry.heroku.com/elden-ring-app/web --provenance=false",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "pnpm run lint && echo \"Tests Complete!\""
