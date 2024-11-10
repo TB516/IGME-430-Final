@@ -3,13 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "start": "node dist/server.js",
     "dev": "nodemon src/server.ts",
     "build": "tsc",
     "build:image": "cd ../ && docker build . --file=Dockerfile.server --tag=registry.heroku.com/elden-ring-api/web --provenance=false",
-    "lint": "eslint ./src . --ext .ts", 
+    "lint": "eslint ./src . --ext .ts",
     "test": "pnpm run lint && echo \"Tests Complete!\""
   },
   "keywords": [],
@@ -33,6 +35,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
+    "helmet": "^8.0.0",
     "mongoose": "^8.7.1"
   }
 }

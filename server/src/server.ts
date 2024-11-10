@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import compression from 'compression';
 import cors from 'cors';
+import helmet from 'helmet';
 import apiRouter from './controllers/api';
 
 require('dotenv').config();
@@ -9,6 +10,7 @@ require('dotenv').config();
 const app = express();
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
+app.use(helmet());
 app.use(cors());
 app.use(compression());
 app.use(express.json());
