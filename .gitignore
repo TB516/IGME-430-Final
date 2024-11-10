@@ -131,3 +131,6 @@ dist
 
 #vscode files
 .vscode
+
+#pnpm settings
+.npmrc
