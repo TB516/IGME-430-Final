@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { HydratedDocument, Model } from 'mongoose';
-import ISpell from '../../../../models/ISpell';
+import ISpell from '../../../../models/Spells/ISpell';
 import { badRequestResponse, postTypeUnsupportedResponse } from '../../../errorResponses';
 
 /**

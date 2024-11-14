@@ -7,7 +7,7 @@ import {
 } from './spellResponses';
 import { getSorceryMatches } from './dbQueries';
 import { endpointNotFoundResponse, methodNotAllowedResponse } from '../../errorResponses';
-import { Sorceries } from '../../../models/Spell';
+import { Sorceries } from '../../../models/Spells/Spell';
 
 const sorceriesRouter = Router();
 

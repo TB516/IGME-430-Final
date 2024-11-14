@@ -1,6 +1,6 @@
-import ISpell from '../../../models/ISpell';
-import ISpellQuery from '../../../models/ISpellQuery';
-import { Incantations, Sorceries } from '../../../models/Spell';
+import ISpell from '../../../models/Spells/ISpell';
+import ISpellQuery from '../../../models/Spells/ISpellQuery';
+import { Incantations, Sorceries } from '../../../models/Spells/Spell';
 
 // eslint-disable-next-line no-unused-vars
 type dbQuery = (query: ISpellQuery) => Promise<ISpell[]>;

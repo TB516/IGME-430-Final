@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { dbQuery } from '../dbQueries';
-import ISpellQuery from '../../../../models/ISpellQuery';
+import ISpellQuery from '../../../../models/Spells/ISpellQuery';
 import { badRequestResponse } from '../../../errorResponses';
 
 /**

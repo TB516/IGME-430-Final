@@ -7,7 +7,7 @@ import {
 } from './spellResponses';
 import { getIncantationMatches } from './dbQueries';
 import { endpointNotFoundResponse, methodNotAllowedResponse } from '../../errorResponses';
-import { Incantations } from '../../../models/Spell';
+import { Incantations } from '../../../models/Spells/Spell';
 
 const incantationsRouter = Router();
 
