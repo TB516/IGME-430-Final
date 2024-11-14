@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { spellsRouter } from './spells';
+import spellsRouter from './spells';
 
 const apiRouter = Router();
 
