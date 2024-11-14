@@ -6,7 +6,7 @@ import {
   postSpellResponse,
 } from './spellResponses';
 import { getIncantationMatches } from './dbQueries';
-import { endpointNotFoundResponse, methodNotAllowedResponse } from '../errorResponses';
+import { endpointNotFoundResponse, methodNotAllowedResponse } from '../../errorResponses';
 import { Incantations } from '../../../models/Spell';
 
 const incantationsRouter = Router();

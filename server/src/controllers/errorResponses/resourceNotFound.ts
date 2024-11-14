@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import IErrorMessage from '../../../models/IErrorMessage';
+import IErrorMessage from '../../models/IErrorMessage';
 
 /**
  * Responds with a 404 resource not found status.

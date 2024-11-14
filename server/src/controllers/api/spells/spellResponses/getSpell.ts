@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { Model } from 'mongoose';
 import ISpell from '../../../../models/ISpell';
-import { resourceNotFoundResponse } from '../../errorResponses';
+import { resourceNotFoundResponse } from '../../../errorResponses';
 
 const getSpellResponse = async (request: Request, response: Response, SpellModel: Model<ISpell>) => {
   const exists = await SpellModel.exists({ name: RegExp(`(?:^|,)(${request.params.name})(?:,|$)`, 'i') });

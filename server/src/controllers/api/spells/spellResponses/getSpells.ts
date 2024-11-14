@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { dbQuery } from '../dbQueries';
 import ISpellQuery from '../../../../models/ISpellQuery';
-import { badRequestResponse } from '../../errorResponses';
+import { badRequestResponse } from '../../../errorResponses';
 
 /**
  * Searches database based on query parameters and responds with all matching spells

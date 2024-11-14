@@ -6,7 +6,7 @@ import {
   postSpellResponse,
 } from './spellResponses';
 import { getSorceryMatches } from './dbQueries';
-import { endpointNotFoundResponse, methodNotAllowedResponse } from '../errorResponses';
+import { endpointNotFoundResponse, methodNotAllowedResponse } from '../../errorResponses';
 import { Sorceries } from '../../../models/Spell';
 
 const sorceriesRouter = Router();

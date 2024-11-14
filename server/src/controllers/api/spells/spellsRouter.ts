@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
 import { getSpellsResponse } from './spellResponses';
 import { getSpellMatches } from './dbQueries';
-import { endpointNotFoundResponse, methodNotAllowedResponse } from '../errorResponses';
+import { endpointNotFoundResponse, methodNotAllowedResponse } from '../../errorResponses';
 import sorceriesRouter from './sorceriesRouter';
 import incantationsRouter from './incantationsRouter';
 

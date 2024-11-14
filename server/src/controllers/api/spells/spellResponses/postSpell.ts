@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { HydratedDocument, Model } from 'mongoose';
 import ISpell from '../../../../models/ISpell';
-import { badRequestResponse, postTypeUnsupportedResponse } from '../../errorResponses';
+import { badRequestResponse, postTypeUnsupportedResponse } from '../../../errorResponses';
 
 /**
  * Adds spell and responds with spell that was just added
