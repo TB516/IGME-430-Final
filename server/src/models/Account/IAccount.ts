@@ -7,5 +7,6 @@ interface IAccount{
   password: string,
   apiKey: string,
   favorites: IAccountFavorites,
+  createdDate: Date,
 }
 export default IAccount;
