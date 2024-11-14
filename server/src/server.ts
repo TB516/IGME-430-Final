@@ -5,6 +5,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import session from 'express-session';
 import apiRouter from './controllers/api';
+import accountRouter from './controllers/account';
 
 require('dotenv').config();
 
@@ -24,6 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(apiRouter);
+app.use(accountRouter);
 
 mongoose.connect(process.env.MONGODB_URI!).catch((err) => { console.log(err); });
 

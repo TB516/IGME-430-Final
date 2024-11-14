@@ -2,6 +2,6 @@ import { Router } from 'express';
 
 const accountRouter = Router();
 
-accountRouter.use('/account');
+accountRouter.get('');
 
 export default accountRouter;
