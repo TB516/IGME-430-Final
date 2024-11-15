@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 export const Navbar = (): React.JSX.Element => {
   const [isActive, setActive] = useState(false);
@@ -22,13 +22,10 @@ export const Navbar = (): React.JSX.Element => {
             </a>
           </div>
 
-          <div className={`navbar-menu ${isActive ? "is-active" : ""}`}>
-            <Link to={"/tests"} className="navbar-item">Tester</Link>
-
-            <Link to={"/documentation"} className="navbar-item">Documentation</Link>          
-          </div>
+          <div className={`navbar-menu ${isActive ? "is-active" : ""}`}> </div>
         </nav>
       </header>
+      <Outlet />
     </>
   )
 }
