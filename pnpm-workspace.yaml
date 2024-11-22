@@ -1,3 +1,4 @@
 packages:
-- 'client'
-- 'server'
+- 'app/client'
+- 'app/server'
+- 'api'

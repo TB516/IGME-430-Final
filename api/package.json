@@ -1,5 +1,5 @@
 {
-  "name": "server",
+  "name": "api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,7 +10,7 @@
     "start": "node dist/server.js",
     "dev": "nodemon src/server.ts",
     "build": "tsc",
-    "build:image": "cd ../ && docker build . --file=Dockerfile.server --tag=registry.heroku.com/elden-ring-api/web --provenance=false",
+    "build:image": "cd ../ && docker build . --file=Dockerfile.api --tag=registry.heroku.com/elden-ring-api/web --provenance=false",
     "lint": "eslint ./src . --ext .ts",
     "test": "pnpm run lint && echo \"Tests Complete!\""
   },
