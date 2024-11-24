@@ -1,5 +1,5 @@
 import ISpell from './ISpell';
-import { ValidationOutput } from '../types';
+import { ValidationOutput } from '../ValidationOutput';
 
 class Spell implements ISpell {
   _id?: string;
