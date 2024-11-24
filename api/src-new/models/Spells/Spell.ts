@@ -77,6 +77,24 @@ class Spell implements ISpell {
 
     return Object.keys(errors).length !== 0 ? errors : true;
   }
+
+  public toJSON(): ISpell {
+    return {
+      _id: this._id,
+      name: this.name,
+      image: this.image,
+      description: this.description,
+      effect: this.effect,
+      fp: this.fp,
+      slot: this.slot,
+      int: this.int,
+      faith: this.faith,
+      arc: this.arc,
+      bonus: this.bonus,
+      location: this.location,
+      stamina: this.stamina,
+    };
+  }
 }
 
 export default Spell;
