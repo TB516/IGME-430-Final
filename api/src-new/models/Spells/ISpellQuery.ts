@@ -1,5 +1,6 @@
-interface ISpellQuery{
-  name?: string | RegExp,
+import IQuery from '../IQuery';
+
+interface ISpellQuery extends IQuery{
   fp?: number,
   slot?: number,
 }
