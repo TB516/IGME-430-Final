@@ -1,6 +1,6 @@
-interface ISpell{
-  _id?: string,
-  name: string,
+import IData from '../IData';
+
+interface ISpell extends IData{
   image?: string,
   description: string,
   effect: string,
