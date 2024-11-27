@@ -1,22 +1,22 @@
 import Query from '../Query';
 
 class SpellQuery extends Query {
-  protected fp: string | undefined;
+  protected _fp: string | undefined;
 
-  protected slot: string | undefined;
+  protected _slot: string | undefined;
 
   constructor(name?: string | RegExp, fp?: string, slot?: string) {
     super(name);
-    this.fp = fp;
-    this.slot = slot;
+    this._fp = fp;
+    this._slot = slot;
   }
 
-  public get getFp(): string | undefined {
-    return this.fp;
+  public get fp(): string | undefined {
+    return this._fp;
   }
 
-  public get getSlot(): string | undefined {
-    return this.slot;
+  public get slot(): string | undefined {
+    return this._slot;
   }
 }
 

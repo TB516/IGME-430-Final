@@ -1,19 +1,19 @@
 abstract class Data {
-  protected id: string | undefined;
+  protected _id: string | undefined;
 
-  protected name: string;
+  protected _name: string;
 
   constructor(id: string | undefined, name: string) {
-    this.id = id;
-    this.name = name;
+    this._id = id;
+    this._name = name;
   }
 
-  public get getId() : string | undefined {
-    return this.id;
+  public get id() : string | undefined {
+    return this._id;
   }
 
-  public get getName() : string {
-    return this.name;
+  public get name() : string {
+    return this._name;
   }
 }
 

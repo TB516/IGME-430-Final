@@ -1,12 +1,12 @@
 abstract class Query {
-  protected name: string | RegExp | undefined;
+  protected _name: string | RegExp | undefined;
 
   constructor(name?: string | RegExp) {
-    this.name = name;
+    this._name = name;
   }
 
-  public get getName() : string | RegExp | undefined {
-    return this.name;
+  public get name() : string | RegExp | undefined {
+    return this._name;
   }
 }
 

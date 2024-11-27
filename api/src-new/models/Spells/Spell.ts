@@ -2,27 +2,27 @@ import Data from '../Data';
 import { ValidationOutput } from '../ValidationOutput';
 
 class Spell extends Data {
-  protected image?: string;
+  protected _image?: string;
 
-  protected description: string;
+  protected _description: string;
 
-  protected effect: string;
+  protected _effect: string;
 
-  protected fp: string;
+  protected _fp: string;
 
-  protected slot: number;
+  protected _slot: number;
 
-  protected int: number;
+  protected _int: number;
 
-  protected faith: number;
+  protected _faith: number;
 
-  protected arc: number;
+  protected _arc: number;
 
-  protected bonus?: string;
+  protected _bonus?: string;
 
-  protected location?: string;
+  protected _location?: string;
 
-  protected stamina: number;
+  protected _stamina: number;
 
   constructor(
     id: string | undefined,
@@ -40,17 +40,61 @@ class Spell extends Data {
     stamina: number,
   ) {
     super(id, name);
-    this.image = image;
-    this.description = description;
-    this.effect = effect;
-    this.fp = fp;
-    this.slot = slot;
-    this.int = int;
-    this.faith = faith;
-    this.arc = arc;
-    this.bonus = bonus;
-    this.location = location;
-    this.stamina = stamina;
+    this._image = image;
+    this._description = description;
+    this._effect = effect;
+    this._fp = fp;
+    this._slot = slot;
+    this._int = int;
+    this._faith = faith;
+    this._arc = arc;
+    this._bonus = bonus;
+    this._location = location;
+    this._stamina = stamina;
+  }
+
+  public get image(): string | undefined {
+    return this._image;
+  }
+
+  public get description(): string {
+    return this._description;
+  }
+
+  public get effect(): string {
+    return this._effect;
+  }
+
+  public get fp(): string {
+    return this._fp;
+  }
+
+  public get slot(): number {
+    return this._slot;
+  }
+
+  public get int(): number {
+    return this._int;
+  }
+
+  public get faith(): number {
+    return this._faith;
+  }
+
+  public get arc(): number {
+    return this.arc;
+  }
+
+  public get bonus(): string | undefined {
+    return this._bonus;
+  }
+
+  public get location(): string | undefined {
+    return this._location;
+  }
+
+  public get stamina(): number {
+    return this._stamina;
   }
 
   public validate(): ValidationOutput {
