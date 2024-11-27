@@ -9,6 +9,11 @@ abstract class MongoRepository<T extends Data> implements IRepository<T> {
 
   protected model: mongoose.Model<T>;
 
+  constructor(connection: mongoose.Connection, model: mongoose.Model<T>) {
+    this.connection = connection;
+    this.model = model;
+  }
+
   abstract search(query: Query): Promise<T[]>;
 
   abstract findById(id: string): Promise<T | undefined>;
