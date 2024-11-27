@@ -1,7 +1,6 @@
-import { ISpell, ISpellQuery, Spell } from './Spells';
+import { Spell, SpellQuery } from './Spells';
 
 export {
-  ISpell,
-  ISpellQuery,
   Spell,
+  SpellQuery,
 };

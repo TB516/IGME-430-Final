@@ -1,5 +1,4 @@
-import ISpell from './ISpell';
-import ISpellQuery from './ISpellQuery';
+import SpellQuery from './SpellQuery';
 import Spell from './Spell';
 
-export { ISpell, ISpellQuery, Spell };
+export { SpellQuery, Spell };
