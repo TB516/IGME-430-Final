@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-vars */
-import IQuery from '../models/IQuery';
+import Data from '../models/Data';
+import Query from '../models/Query';
 
-abstract class BaseRepository<T> {
-  abstract search(query: IQuery): Promise<T[]>;
+abstract class BaseRepository<T extends Data> {
+  abstract search(query: Query): Promise<T[]>;
 
   abstract findById(id: string): Promise<T | undefined>;
 
