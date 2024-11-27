@@ -5,13 +5,13 @@ import Data from '../../models/Data';
 import Query from '../../models/Query';
 
 abstract class MongoRepository<T extends Data> implements IRepository<T> {
-  protected connection: mongoose.Connection;
+  protected _connection: mongoose.Connection;
 
-  protected model: mongoose.Model<T>;
+  protected _model: mongoose.Model<T>;
 
-  constructor(connection: mongoose.Connection, model: mongoose.Model<T>) {
-    this.connection = connection;
-    this.model = model;
+  constructor(connection: mongoose.Connection, schema: mongoose.Schema<T>, collectionName: string) {
+    this._connection = connection;
+    this._model = this._connection.model<T>(collectionName, schema);
   }
 
   abstract search(query: Query): Promise<T[]>;
