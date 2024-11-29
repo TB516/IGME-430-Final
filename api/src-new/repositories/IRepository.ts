@@ -7,7 +7,7 @@ interface IRepository<T extends Data> {
 
   findById(id: string): Promise<T | null>;
 
-  exists(data: T): Promise<boolean>;
+  exists(data: T): Promise<string | null>;
 
   create(data: T): Promise<T | null>;
 

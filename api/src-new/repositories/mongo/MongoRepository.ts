@@ -15,7 +15,7 @@ abstract class MongoRepository<T extends Data> implements IRepository<T> {
 
   abstract findById(id: string): Promise<T | null>;
 
-  abstract exists(data: T): Promise<boolean>;
+  abstract exists(data: T): Promise<string | null>;
 
   abstract create(data: T): Promise<T | null>;
 
