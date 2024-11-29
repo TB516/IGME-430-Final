@@ -18,6 +18,7 @@
 	  "import/extensions": "off",
     "import/no-extraneous-dependencies": ["warn", {"devDependencies": false, "optionalDependencies": false, "peerDependencies": false}],
     "arrow-body-style": "off",
-    "max-len": "off"
+    "max-len": "off",
+    "class-methods-use-this": "off"
   }
 }
