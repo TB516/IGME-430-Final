@@ -1,7 +1,7 @@
 import { model, Schema } from 'mongoose';
-import { Spell } from '../../../models';
+import { ISpell } from '../../../models/Spells';
 
-const spellSchema = new Schema<Spell>(
+const spellSchema = new Schema<ISpell>(
   {
     name: {
       type: String,
@@ -58,7 +58,7 @@ const spellSchema = new Schema<Spell>(
   },
 );
 
-const Incantations = model<Spell>('Incantations', spellSchema);
-const Sorceries = model<Spell>('Sorceries', spellSchema);
+const Incantations = model<ISpell>('Incantations', spellSchema);
+const Sorceries = model<ISpell>('Sorceries', spellSchema);
 
 export { Incantations, Sorceries };
