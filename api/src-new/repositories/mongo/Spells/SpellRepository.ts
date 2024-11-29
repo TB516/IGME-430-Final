@@ -1,67 +1,67 @@
-import mongoose from 'mongoose';
 import MongoRepository from '../MongoRepository';
 import { Spell } from '../../../models';
-import Query from '../../../models/Query';
+import { ISpell, SpellQuery } from '../../../models/Spells';
+import ISpellQuery from '../../../models/Spells/ISpellQuery';
 
-export default class SpellRepository extends MongoRepository<Spell> {
-  public async search(query: Query): Promise<Spell[]> {
-    const mongoObjects = await this._model.find(query).lean<Spell[]>().exec();
-    return mongoObjects.map((s) => this.toData(s));
+export default class SpellRepository extends MongoRepository<Spell, ISpell> {
+  public async search(query: SpellQuery): Promise<Spell[]> {
+    const mongoQuery = this.toIQuery(query);
+    console.log(mongoQuery);
+
+    const mongoObjects = await this._model.find(mongoQuery).lean<ISpell[]>().exec();
+
+    return mongoObjects.map((s) => this.toObjectT(s));
   }
 
-  public async findById(id: string): Promise<Spell | null> {
-    const mongoObject = await this._model.findById(id).lean<Spell>().exec();
+  protected toIQuery(query: SpellQuery): ISpellQuery {
+    const formattedQuery = {} as ISpellQuery;
 
-    return mongoObject ? this.toData(mongoObject) : null;
-  }
-
-  public async exists(spell: Spell): Promise<string | null> {
-    const exists = await this._model.exists({ name: spell.name }).exec();
-
-    return exists ? exists._id.toString() : null;
-  }
-
-  public async create(spell: Spell): Promise<Spell | null> {
-    try {
-      return this.toData(await this._model.create(spell));
-    } catch {
-      return null;
+    if (query.name) {
+      formattedQuery.name = query.name;
     }
+    if (query.fp) {
+      formattedQuery.fp = query.fp;
+    }
+    if (query.slot) {
+      formattedQuery.slot = query.slot;
+    }
+
+    return formattedQuery;
   }
 
-  public async updateById(id: string, spell: Spell): Promise<Spell | null> {
-    const result = await this._model.findByIdAndUpdate(new mongoose.Types.ObjectId(id), spell).lean<Spell | null>().exec();
-
-    return result ? this.toData(result) : null;
+  protected toObjectU(data: Spell): ISpell {
+    return {
+      _id: data._id,
+      name: data.name,
+      image: data.image,
+      description: data.description,
+      effect: data.effect,
+      fp: data.fp,
+      slot: data.slot,
+      int: data.int,
+      faith: data.faith,
+      arc: data.arc,
+      bonus: data.bonus,
+      location: data.location,
+      stamina: data.stamina,
+    } as ISpell;
   }
 
-  public async deleteById(id: string): Promise<Spell | null> {
-    const deletedSpell = await this._model.findByIdAndDelete(new mongoose.Types.ObjectId(id)).lean<Spell | null>().exec();
-
-    return deletedSpell ? this.toData(deletedSpell) : null;
-  }
-
-  /**
-   * Converts a leaned mongoose doc of a spell to an actual spell object
-   * @param mongooseSpell Leaned mongoose doc to convert to actual spell
-   * @returns Spell object with data of leaned mongoose doc
-   */
-  protected toData(mongooseSpell: Spell): Spell {
+  protected toObjectT(data: ISpell): Spell {
     return new Spell(
-      // eslint-disable-next-line dot-notation
-      mongooseSpell['_id']!.toString(),
-      mongooseSpell.name,
-      mongooseSpell.image,
-      mongooseSpell.description,
-      mongooseSpell.effect,
-      mongooseSpell.fp,
-      mongooseSpell.slot,
-      mongooseSpell.int,
-      mongooseSpell.faith,
-      mongooseSpell.arc,
-      mongooseSpell.bonus,
-      mongooseSpell.location,
-      mongooseSpell.stamina,
+      data._id?.toString(),
+      data.name,
+      data.image,
+      data.description,
+      data.effect,
+      data.fp,
+      data.slot,
+      data.int,
+      data.faith,
+      data.arc,
+      data.bonus,
+      data.location,
+      data.stamina,
     );
   }
 }
