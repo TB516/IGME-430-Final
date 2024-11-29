@@ -13,15 +13,15 @@ abstract class MongoRepository<T extends Data> implements IRepository<T> {
 
   abstract search(query: Query): Promise<T[]>;
 
-  abstract findById(id: string): Promise<T | undefined>;
+  abstract findById(id: string): Promise<T | null>;
 
   abstract exists(data: T): Promise<boolean>;
 
-  abstract create(data: T): Promise<boolean>;
+  abstract create(data: T): Promise<T | null>;
 
-  abstract updateById(id: string, data: T): Promise<T>;
+  abstract updateById(id: string, data: T): Promise<T | null>;
 
-  abstract deleteById(id: string): Promise<T>;
+  abstract deleteById(id: string): Promise<T | null>;
 
   protected abstract toData(data: T): T;
 }
