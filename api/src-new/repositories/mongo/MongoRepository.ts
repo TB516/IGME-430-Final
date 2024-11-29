@@ -3,27 +3,58 @@ import mongoose from 'mongoose';
 import IRepository from '../IRepository';
 import Data from '../../models/Data';
 import Query from '../../models/Query';
+import IData from '../../models/IData';
+import IQuery from '../../models/IQuery';
 
-abstract class MongoRepository<T extends Data> implements IRepository<T> {
-  protected _model: mongoose.Model<T>;
+abstract class MongoRepository<T extends Data, U extends IData> implements IRepository<T> {
+  protected _model: mongoose.Model<U>;
 
-  constructor(model: mongoose.Model<T>) {
+  constructor(model: mongoose.Model<U>) {
     this._model = model;
   }
 
-  abstract search(query: Query): Promise<T[]>;
+  public abstract search(query: Query): Promise<T[]>;
 
-  abstract findById(id: string): Promise<T | null>;
+  public async findById(id: string): Promise<T | null> {
+    const mongoData = await this._model.findById(new mongoose.Types.ObjectId(id)).lean<U>().exec();
 
-  abstract exists(data: T): Promise<string | null>;
+    return mongoData ? this.toObjectT(mongoData) : null;
+  }
 
-  abstract create(data: T): Promise<T | null>;
+  public async exists(data: T): Promise<string | null> {
+    const exists = await this._model.exists({ name: data.name }).exec();
 
-  abstract updateById(id: string, data: T): Promise<T | null>;
+    return exists ? exists._id!.toString() : null;
+  }
 
-  abstract deleteById(id: string): Promise<T | null>;
+  public async create(data: T): Promise<T | null> {
+    try {
+      const mongoData = this.toObjectU(data);
+      return this.toObjectT(await this._model.create(mongoData));
+    } catch {
+      return null;
+    }
+  }
 
-  protected abstract toData(data: T): T;
+  public async updateById(id: string, data: T): Promise<T | null> {
+    const mongoData = this.toObjectU(data);
+
+    const result = await this._model.findByIdAndUpdate(new mongoose.Types.ObjectId(id), mongoData).lean<U | null>().exec();
+
+    return result ? this.toObjectT(result) : null;
+  }
+
+  public async deleteById(id: string): Promise<T | null> {
+    const result = await this._model.findByIdAndDelete(new mongoose.Types.ObjectId(id)).lean<U | null>().exec();
+
+    return result ? this.toObjectT(result) : null;
+  }
+
+  protected abstract toIQuery(query: Query): IQuery;
+
+  protected abstract toObjectU(data: T): U;
+
+  protected abstract toObjectT(data: U): T;
 }
 
 export default MongoRepository;
