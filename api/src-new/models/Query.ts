@@ -1,13 +1,13 @@
 import IQuery from './IQuery';
 
 abstract class Query implements IQuery {
-  protected m_name: string | RegExp | undefined;
+  protected m_name: RegExp | undefined;
 
-  constructor(name?: string | RegExp) {
-    this.m_name = name;
+  constructor(name?: string) {
+    this.m_name = name ? new RegExp(name, 'i') : undefined;
   }
 
-  public get name() : string | RegExp | undefined {
+  public get name() : RegExp | undefined {
     return this.m_name;
   }
 }

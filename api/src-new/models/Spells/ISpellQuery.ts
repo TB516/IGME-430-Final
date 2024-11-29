@@ -1,8 +1,8 @@
 import IQuery from '../IQuery';
 
 interface ISpellQuery extends IQuery {
-  fp: string | undefined,
-  slot: string | undefined,
+  fp: RegExp | undefined,
+  slot: number | undefined,
 }
 
 export default ISpellQuery;

@@ -2,21 +2,21 @@ import Query from '../Query';
 import ISpellQuery from './ISpellQuery';
 
 class SpellQuery extends Query implements ISpellQuery {
-  protected m_fp: string | undefined;
+  protected m_fp: RegExp | undefined;
 
-  protected m_slot: string | undefined;
+  protected m_slot: number | undefined;
 
-  constructor(name?: string | RegExp, fp?: string, slot?: string) {
+  constructor(name?: string, fp?: string, slot?: number) {
     super(name);
-    this.m_fp = fp;
+    this.m_fp = fp ? new RegExp(fp, 'i') : undefined;
     this.m_slot = slot;
   }
 
-  public get fp(): string | undefined {
+  public get fp(): RegExp | undefined {
     return this.m_fp;
   }
 
-  public get slot(): string | undefined {
+  public get slot(): number | undefined {
     return this.m_slot;
   }
 }
