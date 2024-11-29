@@ -1,12 +1,14 @@
-abstract class Query {
-  protected _name: string | RegExp | undefined;
+import IQuery from './IQuery';
+
+abstract class Query implements IQuery {
+  protected m_name: string | RegExp | undefined;
 
   constructor(name?: string | RegExp) {
-    this._name = name;
+    this.m_name = name;
   }
 
   public get name() : string | RegExp | undefined {
-    return this._name;
+    return this.m_name;
   }
 }
 

@@ -1,19 +1,21 @@
-abstract class Data {
-  protected _id: string | undefined;
+import IData from './IData';
 
-  protected _name: string;
+abstract class Data implements IData {
+  protected m_id: string | undefined;
+
+  protected m_name: string;
 
   constructor(id: string | undefined, name: string) {
-    this._id = id;
-    this._name = name;
+    this.m_id = id;
+    this.m_name = name;
   }
 
-  public get id() : string | undefined {
-    return this._id;
+  public get _id() : string | undefined {
+    return this.m_id;
   }
 
   public get name() : string {
-    return this._name;
+    return this.m_name;
   }
 }
 

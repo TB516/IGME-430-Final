@@ -1,28 +1,29 @@
-import Data from '../Data';
 import { ValidationOutput } from '../ValidationOutput';
+import ISpell from './ISpell';
+import Data from '../Data';
 
-class Spell extends Data {
-  protected _image?: string;
+class Spell extends Data implements ISpell {
+  protected m_image?: string;
 
-  protected _description: string;
+  protected m_description: string;
 
-  protected _effect: string;
+  protected m_effect: string;
 
-  protected _fp: string;
+  protected m_fp: string;
 
-  protected _slot: number;
+  protected m_slot: number;
 
-  protected _int: number;
+  protected m_int: number;
 
-  protected _faith: number;
+  protected m_faith: number;
 
-  protected _arc: number;
+  protected m_arc: number;
 
-  protected _bonus?: string;
+  protected m_bonus?: string;
 
-  protected _location?: string;
+  protected m_location?: string;
 
-  protected _stamina: number;
+  protected m_stamina: number;
 
   constructor(
     id: string | undefined,
@@ -40,61 +41,61 @@ class Spell extends Data {
     stamina: number,
   ) {
     super(id, name);
-    this._image = image;
-    this._description = description;
-    this._effect = effect;
-    this._fp = fp;
-    this._slot = slot;
-    this._int = int;
-    this._faith = faith;
-    this._arc = arc;
-    this._bonus = bonus;
-    this._location = location;
-    this._stamina = stamina;
+    this.m_image = image;
+    this.m_description = description;
+    this.m_effect = effect;
+    this.m_fp = fp;
+    this.m_slot = slot;
+    this.m_int = int;
+    this.m_faith = faith;
+    this.m_arc = arc;
+    this.m_bonus = bonus;
+    this.m_location = location;
+    this.m_stamina = stamina;
   }
 
   public get image(): string | undefined {
-    return this._image;
+    return this.m_image;
   }
 
   public get description(): string {
-    return this._description;
+    return this.m_description;
   }
 
   public get effect(): string {
-    return this._effect;
+    return this.m_effect;
   }
 
   public get fp(): string {
-    return this._fp;
+    return this.m_fp;
   }
 
   public get slot(): number {
-    return this._slot;
+    return this.m_slot;
   }
 
   public get int(): number {
-    return this._int;
+    return this.m_int;
   }
 
   public get faith(): number {
-    return this._faith;
+    return this.m_faith;
   }
 
   public get arc(): number {
-    return this.arc;
+    return this.m_arc;
   }
 
   public get bonus(): string | undefined {
-    return this._bonus;
+    return this.m_bonus;
   }
 
   public get location(): string | undefined {
-    return this._location;
+    return this.m_location;
   }
 
   public get stamina(): number {
-    return this._stamina;
+    return this.m_stamina;
   }
 
   public validate(): ValidationOutput {
