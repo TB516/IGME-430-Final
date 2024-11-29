@@ -1,9 +1,7 @@
-import { ObjectId } from 'mongoose';
+import IData from '../IData';
 
-interface ISpell{
-  _id: ObjectId,
-  name: string,
-  image: string,
+interface ISpell extends IData {
+  image: string | undefined,
   description: string,
   effect: string,
   fp: string,
@@ -11,9 +9,9 @@ interface ISpell{
   int: number,
   faith: number,
   arc: number,
-  bonus: string,
-  location: string,
-  stamina: number
+  bonus: string | undefined,
+  location: string | undefined,
+  stamina: number,
 }
 
 export default ISpell;
