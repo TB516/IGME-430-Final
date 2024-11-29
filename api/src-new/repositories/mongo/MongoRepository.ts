@@ -23,7 +23,7 @@ abstract class MongoRepository<T extends Data> implements IRepository<T> {
 
   abstract deleteById(id: string): Promise<T>;
 
-  abstract toData(data: T): T;
+  protected abstract toData(data: T): T;
 }
 
 export default MongoRepository;
