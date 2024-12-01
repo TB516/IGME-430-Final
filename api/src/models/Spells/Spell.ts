@@ -101,7 +101,7 @@ class Spell extends Data implements ISpell {
   public validate(): ValidationOutput {
     const errors = {} as Record<string, string>;
 
-    return Object.keys(errors).length !== 0 ? errors : true;
+    return errors;
   }
 }
 

@@ -1,1 +1,1 @@
-export type ValidationOutput = true | Record<string, string>;
+export type ValidationOutput = Record<string, string>;
