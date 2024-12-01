@@ -14,6 +14,10 @@ abstract class Data implements IData {
     return this.m_id;
   }
 
+  public set _id(id: string | undefined) {
+    this.m_id = id;
+  }
+
   public get name() : string {
     return this.m_name;
   }
