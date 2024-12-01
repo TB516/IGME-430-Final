@@ -6,7 +6,6 @@ import ISpellQuery from '../../../models/Spells/ISpellQuery';
 export default class SpellRepository extends MongoRepository<Spell, ISpell> {
   public async search(query: SpellQuery): Promise<Spell[]> {
     const mongoQuery = this.toIQuery(query);
-    console.log(mongoQuery);
 
     const mongoObjects = await this._model.find(mongoQuery).lean<ISpell[]>().exec();
 
