@@ -1,4 +1,4 @@
-import { model, Schema } from 'mongoose';
+import { Schema } from 'mongoose';
 import { ISpell } from '../../../models/Spells';
 
 const spellSchema = new Schema<ISpell>(
@@ -58,7 +58,4 @@ const spellSchema = new Schema<ISpell>(
   },
 );
 
-const Incantations = model<ISpell>('Incantations', spellSchema);
-const Sorceries = model<ISpell>('Sorceries', spellSchema);
-
-export { Incantations, Sorceries };
+export default spellSchema;
