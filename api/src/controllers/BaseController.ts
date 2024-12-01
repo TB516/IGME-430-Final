@@ -17,6 +17,10 @@ abstract class BaseController<T extends Data> {
   abstract post(request: Request, response: Response): Promise<void>;
 
   abstract delete(request: Request, response: Response): Promise<void>;
+
+  protected abstract add(request: Request, response: Response, data: T): Promise<void>;
+
+  protected abstract update(request: Request, response: Response, data: T): Promise<void>;
 }
 
 export default BaseController;
