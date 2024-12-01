@@ -21,7 +21,7 @@ abstract class MongoRepository<T extends Data, U extends IData> implements IRepo
     return mongoData ? this.toObjectT(mongoData) : null;
   }
 
-  public async exists(data: T): Promise<string | null> {
+  public async exists(data: T | U): Promise<string | null> {
     const exists = await this._model.exists({ name: data.name }).exec();
 
     return exists ? exists._id!.toString() : null;
