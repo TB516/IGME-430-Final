@@ -6,7 +6,6 @@
   "files": [
     "dist"
   ],
-  "type": "module",
   "scripts": {
     "start": "node dist/server.js",
     "dev": "nodemon src/server.ts",
