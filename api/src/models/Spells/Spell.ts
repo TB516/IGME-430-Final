@@ -101,7 +101,7 @@ class Spell extends Data implements ISpell {
   public validate(): ValidationOutput {
     const errors = {} as Record<string, string>;
 
-    if (!this.m_name || !/^[A-Za-z0-9]*$/.test(this.m_name)) {
+    if (!this.m_name || !(/^[a-zA-Z ]*$/.test(this.m_name))) {
       errors.name = 'Name must be defined and only contain letters and numbers.';
     }
     if (!this.m_description) {
@@ -113,19 +113,19 @@ class Spell extends Data implements ISpell {
     if (!this.m_fp) {
       errors.fp = 'A fp cost must be provided!';
     }
-    if (!this.m_slot && !Number.isNaN(this.m_slot)) {
+    if (Number.isNaN(this.m_slot)) {
       errors.slot = 'A slot count must be provided as a integer!';
     }
-    if (!this.m_int && !Number.isNaN(this.m_int)) {
+    if (Number.isNaN(this.m_int)) {
       errors.int = 'An int requirement must be provided as a integer!';
     }
-    if (!this.m_faith && !Number.isNaN(this.m_faith)) {
+    if (Number.isNaN(this.m_faith)) {
       errors.faith = 'A faith requirement must be provided as a integer!';
     }
-    if (!this.m_arc && !Number.isNaN(this.m_arc)) {
+    if (Number.isNaN(this.m_arc)) {
       errors.arc = 'An arcane requirement must be provided as a integer!';
     }
-    if (!this.m_stamina && !Number.isNaN(this.m_stamina)) {
+    if (Number.isNaN(this.m_stamina)) {
       errors.arc = 'An stamina usage amount must be provided as a integer!';
     }
 
