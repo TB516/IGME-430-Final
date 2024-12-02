@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import IErrorMessage from '../../models/IErrorMessage';
+import IErrorMessage from '../IErrorMessage';
 
 /**
  * Responds with a 415 unsupported media type status and the entered message
