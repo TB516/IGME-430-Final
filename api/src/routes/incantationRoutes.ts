@@ -2,6 +2,7 @@ import { Request, Response, Router } from 'express';
 import { container } from 'tsyringe';
 import * as clientErrors from '../utils/error/client';
 import SpellController from '../controllers/SpellController';
+import hasAuth from '../middleware/hasAuth';
 
 const incantationRoutes = Router();
 
@@ -32,8 +33,8 @@ const notAllowedIncantations = (request: Request, response: Response) => {
 
 incantationRoutes.get('/', getIncantations);
 incantationRoutes.get('/:name', getIncantation);
-incantationRoutes.post('/', postIncantation);
-incantationRoutes.delete('/:name', deleteIncantation);
+incantationRoutes.post('/', hasAuth, postIncantation);
+incantationRoutes.delete('/:name', hasAuth, deleteIncantation);
 incantationRoutes.all('/:route', clientErrors.endpointNotFoundResponse);
 incantationRoutes.all('*', notAllowedIncantations);
 

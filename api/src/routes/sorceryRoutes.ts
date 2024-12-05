@@ -2,6 +2,7 @@ import { Request, Response, Router } from 'express';
 import { container } from 'tsyringe';
 import * as clientErrors from '../utils/error/client';
 import SpellController from '../controllers/SpellController';
+import hasAuth from '../middleware/hasAuth';
 
 const sorceryRoutes = Router();
 
@@ -32,8 +33,8 @@ const notAllowedSorceries = (request: Request, response: Response) => {
 
 sorceryRoutes.get('/', getSorceries);
 sorceryRoutes.get('/:name', getSorcery);
-sorceryRoutes.post('/', postSorceries);
-sorceryRoutes.delete('/:name', deleteSorceries);
+sorceryRoutes.post('/', hasAuth, postSorceries);
+sorceryRoutes.delete('/:name', hasAuth, deleteSorceries);
 sorceryRoutes.all('/:route', clientErrors.endpointNotFoundResponse);
 sorceryRoutes.all('*', notAllowedSorceries);
 
