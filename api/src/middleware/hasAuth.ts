@@ -10,7 +10,7 @@ const hasAuth = (request: Request, response: Response, next: NextFunction) => {
   try {
     const token = request.headers.authorization ? request.headers.authorization.replace('Bearer', '') : '';
 
-    const payload = verify(token, process.env.authSecret!) as JWTBody;
+    const payload = verify(token, process.env.AUTH_SECRET!) as JWTBody;
 
     if (!payload.isAdmin) {
       errors.unauthorizedResponse(request, response);
