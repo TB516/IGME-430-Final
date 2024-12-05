@@ -14,4 +14,4 @@ RUN pnpm deploy --filter=server --prod /prod/server
 FROM nginx:latest AS app
 COPY ./app/nginx/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /prod/client/dist /usr/share/nginx/html
-CMD sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'
+CMD sed -i -e 's/$PORT/'"$PORT"'/g; s/$DOMAIN/'"$DOMAIN"'/g' /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'
