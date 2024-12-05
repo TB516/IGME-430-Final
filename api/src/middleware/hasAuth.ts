@@ -8,7 +8,7 @@ interface JWTBody {
 
 const hasAuth = (request: Request, response: Response, next: NextFunction) => {
   try {
-    const token = request.headers.authorization ? request.headers.authorization.replace('Bearer', '') : '';
+    const token = request.headers.authorization ? request.headers.authorization.replace('Bearer', '').trim() : '';
 
     const payload = verify(token, process.env.AUTH_SECRET!) as JWTBody;
 
