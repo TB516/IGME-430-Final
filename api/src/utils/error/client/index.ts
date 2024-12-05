@@ -2,6 +2,7 @@ import badRequestResponse from './badRequest';
 import resourceNotFoundResponse, { endpointNotFoundResponse } from './resourceNotFound';
 import methodNotAllowedResponse from './methodNotAllowed';
 import unsupportedTypeResponse, { postTypeUnsupportedResponse } from './unsuportedType';
+import unauthorizedResponse from './unauthorized';
 
 export {
   badRequestResponse,
@@ -10,4 +11,5 @@ export {
   methodNotAllowedResponse,
   unsupportedTypeResponse,
   postTypeUnsupportedResponse,
+  unauthorizedResponse,
 };
