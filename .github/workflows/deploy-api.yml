@@ -14,8 +14,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     environment:
-      name: elden-ring-api
-      url: https://api.eldenring.thomasberrios.com/
+      name: api
+      url: https://igme-430-final-api-4431d83a3c44.herokuapp.com/
     steps:
       # Check-out your repository.
       - name: Checkout
