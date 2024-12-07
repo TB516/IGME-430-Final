@@ -10,6 +10,7 @@
     "start": "node dist/server.js",
     "dev": "nodemon src/server.ts",
     "build": "tsc",
+    "build:image": "cd ../../ && docker build . --file=Dockerfile.app.server --tag=registry.heroku.com/elden-ring-app-server/web --provenance=false",
     "lint": "eslint ./src . --ext .ts",
     "test": "pnpm run lint && echo \"Tests Complete!\""
   },
