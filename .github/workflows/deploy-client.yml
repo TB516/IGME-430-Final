@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: app-client
-      url: https://igme-430-final-app-be63198501da.herokuapp.com/
+      url: https://igme-430-final-app-client-136993506223.herokuapp.com/
     steps:
       # Check-out your repository.
       - name: Checkout
