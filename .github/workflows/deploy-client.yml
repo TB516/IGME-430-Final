@@ -1,5 +1,5 @@
 # Your workflow name.
-name: Deploy Client to heroku
+name: Deploy Client HTML to heroku
 
 # Run workflow on every push to master branch.
 on:
@@ -14,7 +14,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     environment:
-      name: app
+      name: app-client
       url: https://igme-430-final-app-be63198501da.herokuapp.com/
     steps:
       # Check-out your repository.
@@ -35,7 +35,7 @@ jobs:
 
           # (Optional, default: "Dockerfile")
           # Dockerfile name.
-          dockerfile_name: Dockerfile.app
+          dockerfile_name: Dockerfile.app.client
 
           # (Optional, default: "")
           # Additional options of docker build command.
