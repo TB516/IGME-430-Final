@@ -1,5 +1,5 @@
 # Your workflow name.
-name: Deploy Server to heroku
+name: Deploy API to heroku
 
 # Run workflow on every push to master branch.
 on:
