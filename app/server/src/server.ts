@@ -13,7 +13,7 @@ const redisClient = new IORedis(process.env.REDIS_URL!);
 mongoose.connect(process.env.MONGODB_URI!);
 
 const app = express();
-const port = process.env.PORT || process.env.NODE_PORT || 3000;
+const port = process.env.PORT || process.env.NODE_PORT || 3001;
 
 app.use(helmet());
 app.use(cors({ origin: process.env.CLIENT_DOMAIN }));
