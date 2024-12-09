@@ -6,7 +6,7 @@ class SpellQuery extends Query implements ISpellQuery {
 
   protected m_slot: number | undefined;
 
-  constructor(name?: string, fp?: string, slot?: number) {
+  constructor(name?: string | string[], fp?: string, slot?: number) {
     super(name);
     this.m_fp = fp ? new RegExp(fp, 'i') : undefined;
     this.m_slot = slot;

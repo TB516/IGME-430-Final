@@ -104,12 +104,14 @@ class SpellController extends BaseController<Spell> {
 
   protected createQuery(request: Request) : SpellQuery {
     const queryParams = request.query;
-    let spellName: string | undefined;
+    let spellName: string | string[] | undefined;
     let spellFp: string | undefined;
     let spellSlot: number | undefined;
 
-    if (queryParams.name) {
+    if (queryParams.name && !Array.isArray(queryParams.name)) {
       spellName = queryParams.name.toString();
+    } else if (queryParams.name && Array.isArray(queryParams.name)) {
+      spellName = queryParams.name as string[];
     }
     if (queryParams.fp) {
       spellFp = queryParams.fp.toString();
