@@ -20,7 +20,8 @@ const validate = async (account: IAccount): Promise<IAccount | null> => {
     username: dbAccount.username,
     password: dbAccount.password,
     isAdmin: dbAccount.isAdmin,
-    favorites: dbAccount.favorites,
+    favoriteSorceries: dbAccount.favoriteSorceries,
+    favoriteIncantations: dbAccount.favoriteIncantations,
   };
 };
 
