@@ -68,4 +68,4 @@ const getFavorites = async (request: Request, response: Response) => {
   return response.status(200).json(favoriteDocuments);
 };
 
-export default { addFavorite, removeFavorite, getFavorites };
+export { addFavorite, removeFavorite, getFavorites };
