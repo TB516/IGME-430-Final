@@ -6,6 +6,8 @@ import session from 'express-session';
 import IORedis from 'ioredis';
 import { RedisStore } from 'connect-redis';
 import mongoose from 'mongoose';
+import accounts from './accountRoutes';
+import favorites from './favoriteRoutes';
 
 require('dotenv').config();
 
@@ -26,6 +28,9 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
 }));
+
+app.use('/accounts', accounts);
+app.use('/favorites', favorites);
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
