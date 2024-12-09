@@ -1,5 +1,9 @@
+/* eslint-disable no-use-before-define */
 import { model, Schema } from 'mongoose';
+import bcrypt from 'bcrypt';
 import IAccount from './IAccount';
+
+const salt = 10;
 
 const AccountSchema = new Schema<IAccount>({
   username: {
@@ -22,6 +26,26 @@ const AccountSchema = new Schema<IAccount>({
     required: true,
   },
 });
+
+AccountSchema.statics.hash = (password: string) => {
+  return bcrypt.hash(password, salt);
+};
+
+AccountSchema.statics.Validate = async (account: IAccount) => {
+  const dbAccount = await Account.findOne({ username: account.username }).lean().exec();
+
+  if (!dbAccount) {
+    return false;
+  }
+
+  const match = await bcrypt.compare(account.password, dbAccount.password);
+
+  if (!match) {
+    return false;
+  }
+
+  return true;
+};
 
 const Account = model<IAccount>('Accounts', AccountSchema);
 
