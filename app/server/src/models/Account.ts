@@ -19,8 +19,18 @@ const AccountSchema = new Schema<IAccount>(
       type: Boolean,
       required: false,
     },
-    favorites: {
-      type: [String],
+    favoriteSorceries: {
+      type: [{
+        type: String,
+        match: /^[a-zA-Z ]*$/,
+      }],
+      required: true,
+    },
+    favoriteIncantations: {
+      type: [{
+        type: String,
+        match: /^[a-zA-Z ]*$/,
+      }],
       required: true,
     },
   },

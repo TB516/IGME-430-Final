@@ -5,7 +5,8 @@ interface IAccount {
   username: string,
   password: string,
   isAdmin: boolean
-  favorites: string[]
+  favoriteSorceries: string[],
+  favoriteIncantations: string[]
 }
 
 export default IAccount;
