@@ -27,7 +27,7 @@ const createAccount = async (request: Request, response: Response) => {
     request.session.account = { username: account.username, isAdmin: account.isAdmin };
     return response.json();
   } catch (e: any) {
-    if (e.code) {
+    if (e.code === 11000) {
       return response.status(409).json({ error: 'Username already in use!' });
     }
     return response.status(500).json({ error: 'An error occurred!' });
@@ -35,7 +35,7 @@ const createAccount = async (request: Request, response: Response) => {
 };
 
 const login = async (request: Request, response: Response) => {
-  const accountAttempt = { username: request.body.username, password: request.body.password } as IAccount;
+  const accountAttempt = { username: request.body.username, password: request.body.pass } as IAccount;
 
   if (!accountAttempt.username || !accountAttempt.password) {
     return response.status(400).json({ error: 'All fields are required!' });

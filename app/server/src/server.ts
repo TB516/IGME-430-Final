@@ -18,7 +18,13 @@ const app = express();
 const port = process.env.PORT || process.env.NODE_PORT || 3001;
 
 app.use(helmet());
-app.use(cors());
+app.use(cors(
+  {
+    origin: [process.env.CLIENT_URL!],
+    methods: ['GET', 'POST', 'DELETE', 'PUT'],
+    credentials: true,
+  },
+));
 app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -28,6 +34,11 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   name: 'sessionCookie',
+  cookie: {
+    secure: process.env.NODE_ENV === 'production', // Set to true in production, false for localhost
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', // SameSite None for production, Lax for localhost
+    httpOnly: false,
+  },
 }));
 
 app.use('/accounts', accounts);

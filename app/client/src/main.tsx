@@ -3,29 +3,32 @@ import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Navbar } from './components/Navbar'
 import './index.css'
-import AccountGuard from './components/AccountGuard'
+import NeedsAuth from './components/NeedsAuth'
+import AccountPortal from './Pages/AccountPortal'
 
 const router = createBrowserRouter([
   {
     path: '',
-    element: <AccountGuard></AccountGuard>,
+    element: <NeedsAuth child={<Navbar></Navbar>}></NeedsAuth>,
     children: [
       {
-        path: '',
-        element: <Navbar></Navbar>,
-        children: [
-          {
-            index: true,
-            element: <h1>Home</h1>
-          }
-        ]
+        index: true,
+        element: <h1>Home</h1>
+      },
+      {
+        path: 'sorceries',
+        element: <h1>Sorceries</h1>,
+      },
+      {
+        path: 'incantations',
+        element: <h1>Incant</h1>,
       }
     ]
   },
   {
     path: 'login',
-    element: <div>Login</div>,
-  }
+    element: <AccountPortal></AccountPortal>
+  },
 ])
 
 createRoot(document.getElementById('root')!).render(
