@@ -1,4 +1,4 @@
-const SERVER_URL = 'http://127.0.0.1:3001';
-const API_URL = 'http://127.0.0.1:3000';
+const SERVER_URL = import.meta.env.SERVER_URL;
+const API_URL = import.meta.env.API_URL;
 
 export { SERVER_URL, API_URL }
