@@ -11,17 +11,17 @@ const SignUp = ({submitCallback}: { submitCallback: SubmitCallback }) => {
 
         submitCallback(username, password, passwordConfirm);
     }}>
-        <label>
-            Username: <input type="text" value={username} onChange={(e) => {setUsername(e.target.value)}}></input>
+        <label className="label">
+            Username: <input type="text" value={username} onChange={(e) => {setUsername(e.target.value)}} className="input"></input>
         </label>
-        <label>
-            Password: <input type="password" value={password} onChange={(e) => {setPassword(e.target.value)}}></input>
+        <label className="label">
+            Password: <input type="password" value={password} onChange={(e) => {setPassword(e.target.value)}} className="input"></input>
         </label>
-        <label>
-            Confirm Password: <input type="password" value={passwordConfirm} onChange={(e) => {setPasswordConfirm(e.target.value)}}></input>
+        <label className="label">
+            Confirm Password: <input type="password" value={passwordConfirm} onChange={(e) => {setPasswordConfirm(e.target.value)}} className="input"></input>
         </label>
         
-        <input type="submit" value="Sign Up"></input>
+        <input type="submit" value="Sign Up" className="input"></input>
     </form>
 }
 

@@ -10,14 +10,14 @@ const Login = ({submitCallback}: { submitCallback: SubmitCallback }) => {
 
         submitCallback(username, password);
     }}>
-        <label>
-            Username: <input type="text" value={username} onChange={(e) => {setUsername(e.target.value)}}></input>
+        <label className="label">
+            Username: <input type="text" value={username} onChange={(e) => {setUsername(e.target.value)}} className="input"></input>
         </label>
-        <label>
-            Password: <input type="password" value={password} onChange={(e) => {setPassword(e.target.value)}}></input>
+        <label className="label">
+            Password: <input type="password" value={password} onChange={(e) => {setPassword(e.target.value)}} className="input"></input>
         </label>
         
-        <input type="submit" value="Login"></input>
+        <input type="submit" value="Login" className="input"></input>
     </form>
 }
 

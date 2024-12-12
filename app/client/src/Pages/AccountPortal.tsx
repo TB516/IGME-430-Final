@@ -38,16 +38,22 @@ const AccountPortal = () => {
     };
 
     return <>
-        <h1>IGME 430 Final</h1>
-
-        {logingIn ? <Login submitCallback={formSubmit}></Login> : <SignUp submitCallback={formSubmit}></SignUp>}
-
-        {
-            logingIn ? 
-            <h2>Don't have an account <button onClick={() => {setLoginIn(false)}}>Sign Up Here</button></h2> 
-            : 
-            <h2>Already have an account <button onClick={() => {setLoginIn(true)}}>Log In Here</button></h2>
-        }
+        <header>
+            <section className="section hero is-medium is-link">
+                <h1 className="title">IGME 430 Final</h1>
+            </section>
+        </header>
+        <main>
+            <section className="section">
+                {logingIn ? <Login submitCallback={formSubmit}></Login> : <SignUp submitCallback={formSubmit}></SignUp>}
+                {
+                    logingIn ? 
+                    <h2>Don't have an account <button onClick={() => {setLoginIn(false)}}>Sign Up Here</button></h2> 
+                    : 
+                    <h2>Already have an account <button onClick={() => {setLoginIn(true)}}>Log In Here</button></h2>
+                }
+            </section>
+        </main>
     </>
 };
 
