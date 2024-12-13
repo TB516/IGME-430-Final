@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ISpell from "../Models/ISpell";
-import { API_URL, SERVER_URL } from "../config";
+import { API_URL, DEFAULT_AD, SERVER_URL } from "../config";
 import SpellCard from "../components/SpellCard";
 
 const GenericSpellPage = ({ type }: { type: string }): React.JSX.Element => {
@@ -29,7 +29,9 @@ const GenericSpellPage = ({ type }: { type: string }): React.JSX.Element => {
         }
 
         const spellsJson = await spellsResponse.json() as ISpell[];
-        const favJson = (await favoriteResponse.json() as ISpell[]).map((spell => { return spell.m_name }))
+        const favJson = (await favoriteResponse.json() as ISpell[]).map((spell => { return spell.m_name }));
+
+        spellsJson.push(DEFAULT_AD as ISpell);
 
         setSpells(spellsJson);
         setFavorites(favJson);
