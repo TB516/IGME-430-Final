@@ -34,6 +34,33 @@ const createAccount = async (request: Request, response: Response) => {
   }
 };
 
+const changePassword = async (request: Request, response: Response) => {
+  const username = request.session.account?.username;
+  const { password, passwordConfirm } = request.body;
+
+  if (!username || !password || !passwordConfirm) {
+    return response.status(400).json({ error: 'All fields are required!' });
+  }
+
+  if (password !== passwordConfirm) {
+    return response.status(400).json({ error: 'Passwords do not match!' });
+  }
+
+  const hashedPassword = await hashPassword(password);
+
+  const account = await Account.findOne({ username: request.session.account?.username }).exec();
+
+  if (!account) {
+    return response.status(401).json({ error: 'Cannot find account!' });
+  }
+
+  account.password = hashedPassword;
+
+  account.save();
+
+  return response.status(200).send();
+};
+
 const login = async (request: Request, response: Response) => {
   const accountAttempt = { username: request.body.username, password: request.body.pass } as IAccount;
 
@@ -53,10 +80,17 @@ const login = async (request: Request, response: Response) => {
 };
 
 const logout = async (request: Request, response: Response) => {
-  request.session.destroy(() => {
-    response.status(500).json({ error: 'Error destroying session' });
+  request.session.destroy((err) => {
+    if (err) {
+      console.error('Error destroying session:', err);
+      response.status(500).send({ error: 'Error logging out!' });
+    } else {
+      response.clearCookie('sessionCookie');
+      response.status(200).send();
+    }
   });
-  response.status(200).send();
 };
 
-export { createAccount, login, logout };
+export {
+  createAccount, changePassword, login, logout,
+};

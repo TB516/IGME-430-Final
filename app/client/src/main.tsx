@@ -8,6 +8,7 @@ import AccountPortal from './Pages/AccountPortal'
 import GenericSpellPage from './Pages/GenericSpellPage'
 import AuthBlocker from './components/AuthBlocker'
 import Home from './Pages/Home'
+import Account from './Pages/Account'
 
 const router = createBrowserRouter([
   {
@@ -28,7 +29,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'account',
-        element: <h1>Account</h1>,
+        element: <Account></Account>
       }
     ]
   },
