@@ -2,13 +2,13 @@ import { useState } from "react";
 import Login from "../components/Account/Login";
 import SignUp from "../components/Account/SignUp";
 import { SERVER_URL } from "../config";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 type SubmitCallback = (username: string, password: string, passwordConfirm?: string) => void;
 
 const AccountPortal = () => {
     const [logingIn, setLoginIn] = useState(true);
-    const nav = useNavigate();
+    // const nav = useNavigate();
 
     const formSubmit: SubmitCallback = async (username, password, passwordConfirm) => {
         const action = logingIn ? 'login' : 'create';
@@ -25,7 +25,7 @@ const AccountPortal = () => {
             });
 
             if (request.ok) {
-                nav('/');
+                // nav('/');
                 return;
             }
             throw new Error('Login Failed');
