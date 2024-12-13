@@ -44,7 +44,6 @@ app.use(session({
 
 app.use('/accounts', accounts);
 app.use('/favorites', favorites);
-app.use('/*', (req, res) => { res.status(400).json({ error: 'No endpoint exists!' }); });
 
 app.listen(port, () => {
   console.log(process.env.NODE_ENV);
