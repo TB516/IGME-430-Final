@@ -25,8 +25,6 @@ const AccountPortal = () => {
             });
 
             if (request.ok) {
-                console.log('Cookie should be set now');
-
                 nav('/');
                 return;
             }

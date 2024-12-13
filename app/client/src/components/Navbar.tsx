@@ -9,7 +9,7 @@ export const Navbar = (): React.JSX.Element => {
 
   return (
     <>
-      <header>
+      <header className="section">
         <nav className="navbar is-link is-fixed-top" role="navigation">
           <div className="navbar-brand">
             <Link to={"/"} className="navbar-item">Home</Link>
@@ -22,9 +22,16 @@ export const Navbar = (): React.JSX.Element => {
             </a>
           </div>
 
-          <div className={`navbar-menu ${isActive ? "is-active" : ""}`}> </div>
+          <div className={`navbar-menu ${isActive ? "is-active" : ""}`}> 
+            <Link to={"/sorceries"} className="navbar-item">Sorceries</Link>
+            <Link to={"/incantations"} className="navbar-item">Incantations</Link>
+            <div className="navbar-end">
+              <Link to={"/account"} className="navbar-item">Account</Link>
+            </div>
+          </div>
         </nav>
       </header>
+
       <Outlet />
     </>
   )

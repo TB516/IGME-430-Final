@@ -5,6 +5,8 @@ import { Navbar } from './components/Navbar'
 import './index.css'
 import NeedsAuth from './components/NeedsAuth'
 import AccountPortal from './Pages/AccountPortal'
+import GenericSpellPage from './Pages/GenericSpellPage'
+import AuthBlocker from './components/AuthBlocker'
 
 const router = createBrowserRouter([
   {
@@ -17,17 +19,21 @@ const router = createBrowserRouter([
       },
       {
         path: 'sorceries',
-        element: <h1>Sorceries</h1>,
+        element: <GenericSpellPage key='Sorceries' type='Sorceries'></GenericSpellPage>,
       },
       {
         path: 'incantations',
-        element: <h1>Incant</h1>,
+        element: <GenericSpellPage key='Incantations' type='Incantations'></GenericSpellPage>,
+      },
+      {
+        path: 'account',
+        element: <h1>Account</h1>,
       }
     ]
   },
   {
     path: 'login',
-    element: <AccountPortal></AccountPortal>
+    element: <AuthBlocker child={<AccountPortal></AccountPortal>}></AuthBlocker>
   },
 ])
 
