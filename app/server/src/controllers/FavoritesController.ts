@@ -7,8 +7,11 @@ const addFavorite = async (request: Request, response: Response) => {
   if (!account) {
     return response.status(401).json({ error: 'Account could not be found!' });
   }
-  if (!request.body.favorite || typeof (request.body.favorite) !== typeof (String)) {
+  if (!request.body.favorite || typeof (request.body.favorite) !== 'string') {
     return response.status(400).json({ error: 'Favorite could not be found!' });
+  }
+  if (account.favoriteSorceries.findIndex(request.body.favorite) !== -1 || account.favoriteSorceries.findIndex(request.body.favorite) !== -1) {
+    return response.status(400).json({ error: 'Spell already in favorites!' });
   }
 
   if (request.body.type === 'Sorceries') {
@@ -25,6 +28,8 @@ const addFavorite = async (request: Request, response: Response) => {
     return response.status(400).json({ errors: 'Invalid favorite name!' });
   }
 
+  account.save();
+
   return response.status(200).json({ message: 'Added favorite' });
 };
 
@@ -34,8 +39,11 @@ const removeFavorite = async (request: Request, response: Response) => {
   if (!account) {
     return response.status(401).json({ error: 'Account could not be found!' });
   }
-  if (!request.body.favorite || typeof (request.body.favorite) !== typeof (String)) {
+  if (!request.body.favorite || typeof (request.body.favorite) !== 'string') {
     return response.status(400).json({ error: 'Favorite could not be found!' });
+  }
+  if (account.favoriteSorceries.findIndex(request.body.favorite) === -1 || account.favoriteSorceries.findIndex(request.body.favorite) === -1) {
+    return response.status(400).json({ error: 'Spell not in favorites!' });
   }
 
   if (request.body.type === 'Sorceries') {
@@ -45,6 +53,8 @@ const removeFavorite = async (request: Request, response: Response) => {
   } else {
     return response.status(400).json({ errors: 'Invalid favorite type!' });
   }
+
+  account.save();
 
   return response.status(200).json({ message: 'Removed favorite' });
 };
