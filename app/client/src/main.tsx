@@ -37,6 +37,10 @@ const router = createBrowserRouter([
     path: 'login',
     element: <AuthBlocker child={<AccountPortal></AccountPortal>}></AuthBlocker>
   },
+  {
+    path: '*',
+    element: <h1>This isn't a route, go back now!</h1>
+  }
 ])
 
 createRoot(document.getElementById('root')!).render(
