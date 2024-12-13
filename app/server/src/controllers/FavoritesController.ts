@@ -10,7 +10,7 @@ const addFavorite = async (request: Request, response: Response) => {
   if (!request.body.favorite || typeof (request.body.favorite) !== 'string') {
     return response.status(400).json({ error: 'Favorite could not be found!' });
   }
-  if (account.favoriteSorceries.findIndex((name) => name === request.body.favorite) !== -1 || account.favoriteSorceries.findIndex((name) => name === request.body.favorite) !== -1) {
+  if (account.favoriteSorceries.includes(request.body.favorite) || account.favoriteIncantations.includes(request.body.favorite)) {
     return response.status(400).json({ error: 'Spell already in favorites!' });
   }
 
@@ -42,7 +42,7 @@ const removeFavorite = async (request: Request, response: Response) => {
   if (!request.body.favorite || typeof (request.body.favorite) !== 'string') {
     return response.status(400).json({ error: 'Favorite could not be found!' });
   }
-  if (account.favoriteSorceries.findIndex((name) => name === request.body.favorite) === -1 || account.favoriteSorceries.findIndex((name) => name === request.body.favorite) === -1) {
+  if (!account.favoriteSorceries.includes(request.body.favorite) || !account.favoriteIncantations.includes(request.body.favorite)) {
     return response.status(400).json({ error: 'Spell not in favorites!' });
   }
 
