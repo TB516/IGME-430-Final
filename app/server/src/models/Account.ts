@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 /* eslint-disable no-use-before-define */
 import { model, Schema } from 'mongoose';
 import IAccount from './IAccount';
@@ -22,14 +23,14 @@ const AccountSchema = new Schema<IAccount>(
     favoriteSorceries: {
       type: [{
         type: String,
-        match: /^[a-zA-Z ]*$/,
+        match: /[a-zA-Z:'\-\(\)\s]+/,
       }],
       required: true,
     },
     favoriteIncantations: {
       type: [{
         type: String,
-        match: /^[a-zA-Z ]*$/,
+        match: /[a-zA-Z:'\-\(\)\s]+/,
       }],
       required: true,
     },
