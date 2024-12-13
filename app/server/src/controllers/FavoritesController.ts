@@ -7,6 +7,9 @@ const addFavorite = async (request: Request, response: Response) => {
   if (!account) {
     return response.status(401).json({ error: 'Account could not be found!' });
   }
+  if (!request.body.favorite || typeof (request.body.favorite) !== typeof (String)) {
+    return response.status(400).json({ error: 'Favorite could not be found!' });
+  }
 
   if (request.body.type === 'Sorceries') {
     account.favoriteSorceries.push(request.body.favorite);
