@@ -58,15 +58,15 @@ const getFavorites = async (request: Request, response: Response) => {
 
   let query: string;
 
-  if (request.body.type === 'Sorceries') {
+  if (request.query.type === 'Sorceries') {
     query = account.favoriteSorceries.map((favorite) => { return `name=${favorite}`; }).join('&');
-  } else if (request.body.type === 'Incantations') {
+  } else if (request.query.type === 'Incantations') {
     query = account.favoriteIncantations.map((favorite) => { return `name=${favorite}`; }).join('&');
   } else {
     return response.status(400).json({ errors: 'Invalid favorite type!' });
   }
 
-  const favoriteDocuments = await (await fetch(`${process.env.API_URL!}/${request.body.type}/${query}`)).json();
+  const favoriteDocuments = await (await fetch(`${process.env.API_URL!}/${request.query.type}/${query}`)).json();
 
   return response.status(200).json(favoriteDocuments);
 };
