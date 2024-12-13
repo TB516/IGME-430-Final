@@ -42,7 +42,7 @@ const removeFavorite = async (request: Request, response: Response) => {
   if (!request.body.favorite || typeof (request.body.favorite) !== 'string') {
     return response.status(400).json({ error: 'Favorite could not be found!' });
   }
-  if (!account.favoriteSorceries.includes(request.body.favorite) || !account.favoriteIncantations.includes(request.body.favorite)) {
+  if (!account.favoriteSorceries.includes(request.body.favorite) && !account.favoriteIncantations.includes(request.body.favorite)) {
     return response.status(400).json({ error: 'Spell not in favorites!' });
   }
 
