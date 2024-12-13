@@ -56,6 +56,10 @@ const getFavorites = async (request: Request, response: Response) => {
     return response.status(401).json({ error: 'Account could not be found!' });
   }
 
+  if ((request.query.type === 'Sorceries' && account.favoriteSorceries.length === 0) || (request.query.type === 'Incantations' && account.favoriteIncantations.length === 0)) {
+    return response.status(200).json([]);
+  }
+
   let query: string;
 
   if (request.query.type === 'Sorceries') {
