@@ -17,6 +17,7 @@ mongoose.connect(process.env.MONGODB_URI!);
 const app = express();
 const port = process.env.PORT || process.env.NODE_PORT || 3001;
 
+app.set('trust proxy', 1);
 app.use(helmet());
 app.use(cors(
   {
