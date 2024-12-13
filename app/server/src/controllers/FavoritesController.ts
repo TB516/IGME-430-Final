@@ -80,7 +80,7 @@ const getFavorites = async (request: Request, response: Response) => {
     return response.status(400).json({ errors: 'Invalid favorite type!' });
   }
 
-  const favoriteDocuments = await (await fetch(`${process.env.API_URL!}/${request.query.type}/${query}`)).json();
+  const favoriteDocuments = await (await fetch(`${process.env.API_URL!}/${request.query.type}?${query}`)).json();
 
   return response.status(200).json(favoriteDocuments);
 };
