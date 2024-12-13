@@ -1,5 +1,6 @@
 import { ObjectId } from 'mongoose';
 
+// Account interface to map data
 interface IAccount {
   _id: ObjectId
   username: string,

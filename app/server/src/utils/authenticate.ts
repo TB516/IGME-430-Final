@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt';
 import Account from '../models/Account';
 import IAccount from '../models/IAccount';
 
+// Validate account or returns null if validation fails
 const validate = async (account: IAccount): Promise<IAccount | null> => {
   const dbAccount = await Account.findOne({ username: account.username }).exec();
 

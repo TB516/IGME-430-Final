@@ -4,6 +4,7 @@ import authenticate from '../utils/authenticate';
 import hashPassword from '../utils/hashPassword';
 import Account from '../models/Account';
 
+// Creates an account and responds to the request with a session cookie
 const createAccount = async (request: Request, response: Response) => {
   const username = `${request.body.username}`;
   const pass = `${request.body.pass}`;
@@ -34,6 +35,7 @@ const createAccount = async (request: Request, response: Response) => {
   }
 };
 
+// Changes an account password and responds to the request
 const changePassword = async (request: Request, response: Response) => {
   const username = request.session.account?.username;
   const { password, passwordConfirm } = request.body;
@@ -61,6 +63,7 @@ const changePassword = async (request: Request, response: Response) => {
   return response.status(200).send();
 };
 
+// Logs in existing account
 const login = async (request: Request, response: Response) => {
   const accountAttempt = { username: request.body.username, password: request.body.pass } as IAccount;
 
@@ -79,6 +82,7 @@ const login = async (request: Request, response: Response) => {
   return response.status(200).send();
 };
 
+// Logs out account and destroys session
 const logout = async (request: Request, response: Response) => {
   request.session.destroy((err) => {
     if (err) {

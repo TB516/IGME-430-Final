@@ -3,6 +3,7 @@
 import { model, Schema } from 'mongoose';
 import IAccount from './IAccount';
 
+// Account schema so model account data
 const AccountSchema = new Schema<IAccount>(
   {
     username: {

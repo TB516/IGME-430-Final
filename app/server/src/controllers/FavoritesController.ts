@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import Account from '../models/Account';
 
+// Adds favorite name from request body to favorite list
 const addFavorite = async (request: Request, response: Response) => {
   const account = await Account.findOne({ username: request.session.account!.username }).exec();
 
@@ -33,6 +34,7 @@ const addFavorite = async (request: Request, response: Response) => {
   return response.status(200).json({ message: 'Added favorite' });
 };
 
+// Removes favorite name from request body to favorite list
 const removeFavorite = async (request: Request, response: Response) => {
   const account = await Account.findOne({ username: request.session.account!.username }).exec();
 
@@ -59,6 +61,7 @@ const removeFavorite = async (request: Request, response: Response) => {
   return response.status(200).json({ message: 'Removed favorite' });
 };
 
+// Gets list of favorite names and responds
 const getFavorites = async (request: Request, response: Response) => {
   const account = await Account.findOne({ username: request.session.account!.username }).exec();
 
